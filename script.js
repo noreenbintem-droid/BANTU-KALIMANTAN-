@@ -1,25 +1,23 @@
 /* =====================================
-   CAMPAIGN CONFIGURATION
+   BANTU KALIMANTAN
+   SCRIPT FINAL
+===================================== */
+
+
+/* =====================================
+   DATA CAMPAIGN
 ===================================== */
 
 const campaign = {
 
-    collected: 0,
-
     target: 100000000,
+
+    collected: 0,
 
     donors: 0
 
 };
 
-
-/*
-    NANTI SAAT QRIS / PAYMENT GATEWAY SIAP,
-    KITA TIDAK PERLU MENGUBAH DESAIN.
-
-    Cukup hubungkan sistem pembayaran
-    pada fungsi processDonation().
-*/
 
 
 /* =====================================
@@ -40,55 +38,53 @@ function formatRupiah(number) {
 }
 
 
+
 /* =====================================
    UPDATE CAMPAIGN
 ===================================== */
 
 function updateCampaign() {
 
-    const percentage =
-        Math.min(
-            (
-                campaign.collected /
-                campaign.target
-            ) * 100,
-            100
-        );
-
-
     const amount =
         document.getElementById(
             "donationAmount"
         );
-
 
     const donors =
         document.getElementById(
             "donorCount"
         );
 
-
     const progress =
         document.getElementById(
             "progressBar"
         );
-
 
     const percent =
         document.getElementById(
             "progressPercent"
         );
 
-
     const statDonors =
         document.getElementById(
             "statDonors"
         );
 
-
     const statPercent =
         document.getElementById(
             "statPercent"
+        );
+
+
+    let percentage =
+        (campaign.collected /
+        campaign.target) * 100;
+
+
+    percentage =
+        Math.min(
+            percentage,
+            100
         );
 
 
@@ -148,68 +144,78 @@ function updateCampaign() {
 }
 
 
+
 /* =====================================
    DONATION MODAL
 ===================================== */
 
+const modal =
+    document.getElementById(
+        "donationModal"
+    );
+
+
+let selectedAmount =
+    100000;
+
+
+
 function openDonation() {
 
-    const modal =
-        document.getElementById(
-            "donationModal"
-        );
+    if (!modal) return;
 
+    modal.classList.add(
+        "active"
+    );
 
-    modal.classList.add("active");
-
-
-    document.body.style.overflow =
-        "hidden";
+    document.body.classList.add(
+        "modal-open"
+    );
 
 }
 
 
+
 function closeDonation() {
 
-    const modal =
-        document.getElementById(
-            "donationModal"
-        );
-
+    if (!modal) return;
 
     modal.classList.remove(
         "active"
     );
 
-
-    document.body.style.overflow =
-        "";
+    document.body.classList.remove(
+        "modal-open"
+    );
 
 }
+
 
 
 /* =====================================
    SELECT NOMINAL
 ===================================== */
 
-let selectedDonation = 100000;
-
-
 function selectAmount(amount) {
 
-    selectedDonation = amount;
+    selectedAmount =
+        amount;
 
 
-    const selected =
+    const display =
         document.getElementById(
             "selectedAmount"
         );
 
 
-    selected.textContent =
-        formatRupiah(
-            amount
-        );
+    if (display) {
+
+        display.textContent =
+            formatRupiah(
+                amount
+            );
+
+    }
 
 
     const buttons =
@@ -229,14 +235,26 @@ function selectAmount(amount) {
     );
 
 
-    /*
-        event.currentTarget digunakan
-        agar tombol yang dipilih tepat.
-    */
+    const clicked =
+        Array.from(buttons)
+        .find(
+            function(button) {
 
-    if (event && event.currentTarget) {
+                return button
+                    .textContent
+                    .includes(
+                        formatShortRupiah(
+                            amount
+                        )
+                    );
 
-        event.currentTarget.classList.add(
+            }
+        );
+
+
+    if (clicked) {
+
+        clicked.classList.add(
             "selected"
         );
 
@@ -245,47 +263,54 @@ function selectAmount(amount) {
 }
 
 
+
+/* =====================================
+   SHORT RUPIAH
+===================================== */
+
+function formatShortRupiah(amount) {
+
+    if (amount >= 1000000) {
+
+        return "Rp1JT";
+
+    }
+
+    if (amount >= 1000) {
+
+        return "Rp" +
+            (amount / 1000) +
+            "K";
+
+    }
+
+    return "Rp" + amount;
+
+}
+
+
+
 /* =====================================
    PROCESS DONATION
 ===================================== */
 
 function processDonation() {
 
-    /*
-        SEKARANG:
-
-        QRIS belum terhubung.
-
-        NANTI:
-
-        Fungsi ini akan diarahkan
-        ke sistem pembayaran resmi.
-    */
-
-
     alert(
-
         "Nominal " +
-
-        formatRupiah(
-            selectedDonation
-        ) +
-
+        formatRupiah(selectedAmount) +
         " dipilih.\n\n" +
-
-        "Pembayaran QRIS akan tersedia " +
-
-        "setelah sistem pembayaran campaign " +
-
-        "selesai dihubungkan."
-
+        "QRIS/metode pembayaran akan " +
+        "dihubungkan setelah sistem " +
+        "pembayaran campaign siap."
     );
 
 }
 
 
+
 /* =====================================
-   SHARE
+   SHARE CAMPAIGN
 ===================================== */
 
 function shareCampaign() {
@@ -296,9 +321,8 @@ function shareCampaign() {
             "Bantu Kalimantan",
 
         text:
-            "Mari bersama membantu " +
-            "masyarakat terdampak " +
-            "karhutla di Kalimantan.",
+            "Mari bersama mendukung Kalimantan " +
+            "dan masyarakat yang terdampak karhutla.",
 
         url:
             window.location.href
@@ -307,46 +331,113 @@ function shareCampaign() {
 
 
     if (
-        navigator.share &&
-        window.isSecureContext
+        navigator.share
     ) {
 
         navigator.share(
             shareData
         )
-
         .catch(
             function() {}
         );
 
     } else {
 
-        const whatsapp =
-            "https://wa.me/?text=" +
-
-            encodeURIComponent(
-
-                shareData.text +
-
-                "\n\n" +
-
-                shareData.url
-
-            );
-
-
-        window.open(
-            whatsapp,
-            "_blank"
-        );
+        copyCampaignLink();
 
     }
 
 }
 
 
+
 /* =====================================
-   ESCAPE KEY
+   COPY LINK
+===================================== */
+
+function copyCampaignLink() {
+
+    const url =
+        window.location.href;
+
+
+    if (
+        navigator.clipboard
+    ) {
+
+        navigator.clipboard
+            .writeText(url)
+            .then(
+                function() {
+
+                    alert(
+                        "Link campaign berhasil disalin."
+                    );
+
+                }
+            )
+            .catch(
+                function() {
+
+                    fallbackCopy(url);
+
+                }
+            );
+
+    } else {
+
+        fallbackCopy(url);
+
+    }
+
+}
+
+
+
+/* =====================================
+   FALLBACK COPY
+===================================== */
+
+function fallbackCopy(text) {
+
+    const input =
+        document.createElement(
+            "input"
+        );
+
+
+    input.value =
+        text;
+
+
+    document.body.appendChild(
+        input
+    );
+
+
+    input.select();
+
+
+    document.execCommand(
+        "copy"
+    );
+
+
+    document.body.removeChild(
+        input
+    );
+
+
+    alert(
+        "Link campaign berhasil disalin."
+    );
+
+}
+
+
+
+/* =====================================
+   ESCAPE CLOSE MODAL
 ===================================== */
 
 document.addEventListener(
@@ -365,8 +456,9 @@ document.addEventListener(
 );
 
 
+
 /* =====================================
-   START
+   INITIALIZE
 ===================================== */
 
 document.addEventListener(
