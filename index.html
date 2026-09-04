@@ -11,47 +11,949 @@ content="Bersama membantu masyarakat dan mendukung penanganan dampak kebakaran h
 
 <meta name="theme-color" content="#171717">
 
-<link rel="stylesheet" href="style.css">
-
 <style>
-/* FOTO LANGSUNG DARI WIKIMEDIA */
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f7f6f2;
+    color:#222;
+    line-height:1.6;
+    padding-bottom:85px;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+button{
+    font-family:inherit;
+    cursor:pointer;
+}
+
+.container{
+    width:min(1100px,calc(100% - 40px));
+    margin:auto;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:20;
+    color:white;
+}
+
+.header-container{
+    width:min(1100px,calc(100% - 40px));
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:22px 0;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:20px;
+    font-weight:800;
+}
+
+.logo span span{
+    color:#ffb29d;
+}
+
+.logo-fire{
+    font-size:25px;
+}
+
+.header-button{
+    padding:9px 17px;
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:30px;
+    font-size:13px;
+    font-weight:bold;
+    backdrop-filter:blur(8px);
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
 .hero{
-    background-image:
-    linear-gradient(
-        to bottom,
-        rgba(0,0,0,.05),
-        rgba(0,0,0,.82)
-    ),
-    url("https://commons.wikimedia.org/wiki/Special:FilePath/Kalimantan%20%28Borneo%29%20under%20thick%20smoke%20haze%2C%20August%202026.jpg");
-    background-size:cover;
-    background-position:center;
-}
-
-.story-image{
+    min-height:720px;
     position:relative;
-    min-height:500px;
-    overflow:hidden;
+    display:flex;
+    align-items:flex-end;
+    padding:100px 20px 70px;
+    color:white;
+
+    background:
+    linear-gradient(
+        145deg,
+        #191919,
+        #482016 45%,
+        #b94222
+    );
 }
 
-.story-image::before{
+.hero::before{
     content:"";
     position:absolute;
     inset:0;
+
+    background:
+    radial-gradient(
+        circle at 70% 30%,
+        rgba(255,166,73,.35),
+        transparent 28%
+    );
+}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+
     background:
     linear-gradient(
         to bottom,
         rgba(0,0,0,.05),
-        rgba(0,0,0,.7)
-    ),
-    url("https://commons.wikimedia.org/wiki/Special:FilePath/Kabut%20Asap%20Palangka%20Raya.jpg");
-    background-size:cover;
-    background-position:center;
+        rgba(0,0,0,.82)
+    );
 }
 
-.image-placeholder{
+.hero-content{
+    position:relative;
+    width:min(780px,100%);
+    margin:auto;
+}
+
+.campaign-label{
+    display:inline-block;
+    padding:7px 14px;
+    border-radius:30px;
+
+    background:rgba(255,255,255,.13);
+    border:1px solid rgba(255,255,255,.25);
+
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:clamp(45px,8vw,82px);
+    line-height:.98;
+    letter-spacing:-3px;
+    margin-bottom:25px;
+}
+
+.hero h1 span{
+    display:block;
+    color:#ffd0bd;
+}
+
+.hero p{
+    max-width:680px;
+    font-size:18px;
+    color:#eee;
+    margin-bottom:28px;
+}
+
+.primary-button{
+    display:inline-block;
+    background:white;
+    color:#e84b2c;
+    padding:16px 28px;
+    border-radius:12px;
+    font-weight:800;
+    transition:.2s;
+}
+
+.primary-button:hover{
+    transform:translateY(-2px);
+}
+
+.hero-source{
+    margin-top:15px;
+    font-size:11px!important;
+    color:rgba(255,255,255,.65)!important;
+}
+
+
+/* =====================================================
+   DONATION
+===================================================== */
+
+.donation-section{
+    margin-top:-40px;
+    position:relative;
+    z-index:5;
+}
+
+.donation-card{
+    background:white;
+    border-radius:20px;
+    padding:30px;
+
+    box-shadow:
+    0 15px 45px rgba(0,0,0,.10);
+}
+
+.donation-top{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.small-title{
+    color:#707070;
+    font-size:13px;
+}
+
+.donation-card h2{
+    font-size:32px;
+}
+
+.donor-count{
+    text-align:right;
+}
+
+.donor-count strong{
+    display:block;
+    font-size:25px;
+}
+
+.donor-count span{
+    color:#707070;
+    font-size:12px;
+}
+
+.progress-wrapper{
+    margin-top:20px;
+}
+
+.progress-bar{
+    height:12px;
+    width:100%;
+    background:#eee;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-value{
+    width:0%;
+    height:100%;
+    background:#e84b2c;
+    border-radius:inherit;
+    transition:width 1s ease;
+}
+
+.progress-info{
+    display:flex;
+    justify-content:space-between;
+    margin-top:10px;
+    font-size:13px;
+    color:#707070;
+}
+
+.progress-info strong{
+    color:#e84b2c;
+}
+
+.donate-main-button{
+    width:100%;
+    border:0;
+    padding:16px;
+    margin-top:22px;
+    border-radius:11px;
+    background:#e84b2c;
+    color:white;
+    font-size:16px;
+    font-weight:800;
+}
+
+.donate-main-button:hover{
+    background:#c9361d;
+}
+
+.campaign-note{
+    margin-top:12px;
+    text-align:center;
+    color:#999;
+    font-size:11px;
+}
+
+
+/* =====================================================
+   HEADING
+===================================================== */
+
+.section-heading{
+    max-width:700px;
+    margin-bottom:45px;
+}
+
+.section-heading.center{
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+}
+
+.section-heading>span{
+    color:#e84b2c;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:2px;
+}
+
+.section-heading h2{
+    font-size:clamp(32px,5vw,52px);
+    line-height:1.05;
+    letter-spacing:-1.5px;
+    margin-top:10px;
+}
+
+.section-heading em{
+    color:#e84b2c;
+    font-style:normal;
+}
+
+.section-heading p{
+    margin-top:15px;
+    color:#707070;
+}
+
+
+/* =====================================================
+   SITUATION
+===================================================== */
+
+.situation-section{
+    padding:100px 0 80px;
+}
+
+
+/* MONITOR */
+
+.monitor-summary{
+    display:grid;
+    grid-template-columns:1fr 220px;
+    gap:20px;
+
+    margin-bottom:25px;
+    padding:28px;
+
+    border-radius:24px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #201713,
+        #482016
+    );
+
+    color:white;
+    overflow:hidden;
+    position:relative;
+}
+
+.monitor-summary::after{
+    content:"";
+    position:absolute;
+    width:260px;
+    height:260px;
+    right:-100px;
+    top:-120px;
+    border-radius:50%;
+    background:rgba(232,75,44,.22);
+}
+
+.monitor-main{
+    display:flex;
+    gap:20px;
+    align-items:center;
     position:relative;
     z-index:2;
-    background:transparent;
+}
+
+.monitor-icon{
+    width:68px;
+    height:68px;
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:18px;
+    background:rgba(255,255,255,.1);
+
+    font-size:32px;
+}
+
+.monitor-label{
+    color:#ff9b80;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:2px;
+}
+
+.monitor-main h3{
+    margin-top:5px;
+    font-size:25px;
+}
+
+.monitor-main p{
+    color:#cfcfcf;
+    font-size:13px;
+    max-width:600px;
+    margin-top:5px;
+}
+
+.monitor-time{
+    position:relative;
+    z-index:2;
+
+    padding-left:25px;
+
+    border-left:1px solid rgba(255,255,255,.15);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.monitor-time span{
+    color:#aaa;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+.monitor-time strong{
+    font-size:32px;
+}
+
+.monitor-time small{
+    color:#888;
+    font-size:10px;
+}
+
+
+/* REGION */
+
+.region-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.region-card{
+    background:white;
+    border:1px solid #e8e6e1;
+    border-radius:20px;
+    overflow:hidden;
+
+    transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.region-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 40px rgba(0,0,0,.1);
+}
+
+.region-image{
+    height:190px;
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+.region-image::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,.55),
+        transparent
+    );
+}
+
+.region-image span{
+    font-size:70px;
+    position:relative;
+    z-index:2;
+
+    filter:
+    drop-shadow(
+        0 8px 15px rgba(0,0,0,.3)
+    );
+}
+
+.kalbar-image{
+    background:
+    linear-gradient(135deg,#193c2c,#5c8d54);
+}
+
+.kalteng-image{
+    background:
+    linear-gradient(135deg,#381812,#b84224);
+}
+
+.kalsel-image{
+    background:
+    linear-gradient(135deg,#163a2a,#71924b);
+}
+
+.kaltim-image{
+    background:
+    linear-gradient(135deg,#152d26,#426b4a);
+}
+
+.kaltara-image{
+    background:
+    linear-gradient(135deg,#123c3c,#3b8371);
+}
+
+.region-badge{
+    position:absolute;
+    z-index:3;
+    left:15px;
+    bottom:13px;
+
+    padding:6px 10px;
+    border-radius:20px;
+
+    background:rgba(0,0,0,.45);
+    backdrop-filter:blur(8px);
+
+    color:white;
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1px;
+}
+
+.region-content{
+    padding:20px;
+}
+
+.region-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+}
+
+.region-number{
+    color:#e84b2c;
+    font-size:10px;
+    font-weight:900;
+}
+
+.region-title h3{
+    font-size:19px;
+    margin-top:2px;
+}
+
+.status-dot{
+    color:#d98b45;
+    font-size:16px;
+}
+
+.region-content>p{
+    color:#707070;
+    font-size:13px;
+    margin-top:12px;
+    min-height:63px;
+}
+
+.region-info{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-top:15px;
+}
+
+.region-info span{
+    padding:6px 9px;
+    border-radius:7px;
+    background:#f5f5f3;
+    color:#777;
+    font-size:9px;
+}
+
+
+/* HOTSPOT */
+
+.hotspot-card{
+    padding:25px;
+    border-radius:20px;
+
+    background:#171717;
+    color:white;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.hotspot-card::after{
+    content:"";
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    right:-70px;
+    bottom:-80px;
+
+    background:rgba(232,75,44,.2);
+}
+
+.hotspot-top{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.satellite-icon{
+    width:45px;
+    height:45px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,.08);
+
+    font-size:22px;
+}
+
+.hotspot-top span{
+    color:#ff967c;
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1.5px;
+}
+
+.hotspot-card h3{
+    font-size:23px;
+    margin-top:20px;
+}
+
+.hotspot-card>p{
+    color:#aaa;
+    font-size:13px;
+    margin-top:9px;
+}
+
+.hotspot-line{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    margin-top:22px;
+    padding:10px 12px;
+
+    border-radius:9px;
+    background:rgba(255,255,255,.06);
+
+    color:#ccc;
+    font-size:10px;
+}
+
+.pulse{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+
+    background:#e84b2c;
+
+    box-shadow:
+    0 0 0 5px rgba(232,75,44,.12);
+}
+
+.monitor-link{
+    display:inline-block;
+    margin-top:20px;
+
+    color:white;
+    font-size:12px;
+    font-weight:bold;
+
+    position:relative;
+    z-index:2;
+}
+
+
+/* AIR */
+
+.air-panel{
+    margin-top:18px;
+
+    display:grid;
+    grid-template-columns:65px 1fr auto;
+
+    gap:20px;
+    align-items:center;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    background:#eaf2ee;
+    border:1px solid #dce8df;
+}
+
+.air-icon{
+    width:58px;
+    height:58px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:16px;
+
+    background:white;
+    font-size:27px;
+}
+
+.air-content>span{
+    color:#558269;
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1.5px;
+}
+
+.air-content h3{
+    margin-top:4px;
+    font-size:20px;
+}
+
+.air-content p{
+    color:#68756d;
+    font-size:12px;
+    margin-top:4px;
+    max-width:650px;
+}
+
+.air-actions a{
+    display:inline-block;
+
+    padding:11px 15px;
+
+    border-radius:9px;
+
+    background:#e84b2c;
+    color:white;
+
+    font-size:11px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+
+/* NOTE */
+
+.monitor-note{
+    display:flex;
+    gap:10px;
+
+    margin-top:15px;
+    padding:14px 16px;
+
+    border-radius:12px;
+
+    background:#f2f2ef;
+}
+
+.monitor-note p{
+    color:#777;
+    font-size:10px;
+}
+
+
+/* =====================================================
+   STORY
+===================================================== */
+
+.story-section{
+    padding:80px 0 100px;
+}
+
+.story-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+.story-image{
+    min-height:500px;
+    border-radius:22px;
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        145deg,
+        #2b1b17,
+        #b84624,
+        #ed7130
+    );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.story-image-content{
+    text-align:center;
+    color:white;
+    padding:30px;
+}
+
+.story-image-content .big{
+    font-size:100px;
+}
+
+.story-image-content h3{
+    margin-top:10px;
+    letter-spacing:2px;
+}
+
+.story-image-content p{
+    color:rgba(255,255,255,.7);
+    font-size:12px;
+    margin-top:8px;
+}
+
+.story-content p{
+    color:#707070;
+    margin-bottom:20px;
+    font-size:17px;
+}
+
+.story-content>strong{
+    display:block;
+    font-size:20px;
+}
+
+
+/* =====================================================
+   NEEDS
+===================================================== */
+
+.needs-section{
+    background:white;
+    padding:100px 0;
+}
+
+.needs-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.need-card{
+    padding:25px;
+    border:1px solid #e8e6e1;
+    border-radius:18px;
+    transition:.2s;
+}
+
+.need-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 15px 30px rgba(0,0,0,.07);
+}
+
+.need-icon{
+    font-size:40px;
+    margin-bottom:18px;
+}
+
+.need-card h3{
+    margin-bottom:8px;
+}
+
+.need-card p{
+    color:#707070;
+    font-size:14px;
+}
+
+
+/* =====================================================
+   HOW
+===================================================== */
+
+.how-section{
+    padding:100px 0;
+}
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:30px;
+}
+
+.step-number{
+    color:#e84b2c;
+    font-weight:900;
+    font-size:15px;
+    margin-bottom:15px;
+}
+
+.step h3{
+    margin-bottom:8px;
+}
+
+.step p{
+    color:#707070;
+    font-size:14px;
+}
+
+
+/* =====================================================
+   GALLERY
+===================================================== */
+
+.gallery-section{
+    padding:100px 0;
+    background:white;
 }
 
 .gallery{
@@ -62,1074 +964,2229 @@ content="Bersama membantu masyarakat dan mendukung penanganan dampak kebakaran h
 }
 
 .gallery-item{
-    position:relative;
-    overflow:hidden;
     border-radius:16px;
-    background:#222;
-    min-height:180px;
+    overflow:hidden;
+    position:relative;
+
     display:flex;
     align-items:flex-end;
-    justify-content:flex-start;
+
     padding:20px;
+
     color:white;
-    font-size:14px;
-}
 
-.gallery-item::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background-size:cover;
-    background-position:center;
-    transition:.5s;
-}
-
-.gallery-item:hover::before{
-    transform:scale(1.06);
-}
-
-.gallery-item::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        to top,
-        rgba(0,0,0,.78),
-        rgba(0,0,0,.05)
+    background:
+    linear-gradient(
+        135deg,
+        #30201b,
+        #bd4926
     );
-}
-
-.gallery-item > *{
-    position:relative;
-    z-index:2;
 }
 
 .gallery-item.large{
     grid-row:span 2;
 }
 
-.gallery-item:nth-child(1)::before{
-    background-image:url("https://commons.wikimedia.org/wiki/Special:FilePath/Forest%20Fire%20Haze%20in%20Berau.jpg");
+.gallery-item::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,.65),
+        transparent
+    );
 }
 
-.gallery-item:nth-child(2)::before{
-    background-image:url("https://commons.wikimedia.org/wiki/Special:FilePath/Kabut%20Asap%20di%20Banjarmasin.jpg");
-}
-
-.gallery-item:nth-child(3)::before{
-    background-image:url("https://commons.wikimedia.org/wiki/Special:FilePath/Kondisi%20pagi%20hari%20yang%20diselimuti%20kabut%20asap.jpg");
-}
-
-.gallery-item:nth-child(4)::before{
-    background-image:url("https://commons.wikimedia.org/wiki/Special:FilePath/Forest%20Fire%20in%20Berau.jpg");
-}
-
-.gallery-item:nth-child(5)::before{
-    background-image:url("https://commons.wikimedia.org/wiki/Special:FilePath/Kabut%20Asap%20Palangka%20Raya.jpg");
-}
-
-.gallery-caption{
+.gallery-text{
     position:relative;
-    z-index:3;
-    font-weight:700;
+    z-index:2;
 }
 
-.gallery-caption small{
+.gallery-text strong{
     display:block;
-    margin-top:4px;
-    color:#ddd;
-    font-weight:400;
+    font-size:14px;
 }
 
-.photo-credit{
+.gallery-text small{
+    color:rgba(255,255,255,.7);
+    font-size:10px;
+}
+
+
+/* =====================================================
+   TRANSPARENCY
+===================================================== */
+
+.transparency-section{
+    padding:90px 0;
+    background:#171717;
+    color:white;
+}
+
+.transparency-card{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+.transparency-card span{
+    color:#ff9275;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.transparency-card h2{
+    font-size:clamp(30px,5vw,50px);
+    line-height:1.05;
+    margin:15px 0;
+}
+
+.transparency-card p{
+    color:#aaa;
+}
+
+.transparency-stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.transparency-stats div{
+    padding:20px;
+    text-align:center;
+    border:1px solid #333;
+    border-radius:15px;
+}
+
+.transparency-stats strong{
+    display:block;
+    font-size:25px;
+}
+
+.transparency-stats small{
+    color:#888;
+    font-size:12px;
+}
+
+
+/* =====================================================
+   SUPPORT
+===================================================== */
+
+.testimonial-section{
+    padding:100px 0;
+}
+
+.testimonial{
+    max-width:720px;
+    margin:auto;
+    padding:40px;
+    background:white;
+    border-radius:20px;
+    text-align:center;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.05);
+}
+
+.quote-icon{
+    color:#e84b2c;
+    font-size:70px;
+    line-height:.5;
+}
+
+.testimonial p{
+    color:#555;
+    font-size:20px;
+    font-style:italic;
+    margin:20px 0;
+}
+
+
+/* =====================================================
+   SHARE
+===================================================== */
+
+.share-section{
+    padding:0 0 100px;
+}
+
+.share-card{
+    padding:55px 25px;
+    text-align:center;
+    border-radius:25px;
+    background:#fff0eb;
+}
+
+.share-icon{
+    font-size:45px;
+}
+
+.share-card h2{
+    font-size:35px;
+    margin:10px 0;
+}
+
+.share-card p{
+    max-width:520px;
+    margin:0 auto 25px;
+    color:#707070;
+}
+
+.share-button{
+    border:0;
+    padding:14px 25px;
+    border-radius:10px;
+    background:#e84b2c;
+    color:white;
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   SOURCES
+===================================================== */
+
+.sources-section{
+    padding:0 0 70px;
+}
+
+.sources-card{
+    padding:25px;
+    background:white;
+    border:1px solid #e8e6e1;
+    border-radius:18px;
+}
+
+.sources-card h3{
+    margin-bottom:8px;
+}
+
+.sources-card p{
+    color:#707070;
+    font-size:13px;
+}
+
+.source-links{
+    display:flex;
+    gap:10px;
     margin-top:15px;
-    padding:15px 18px;
-    border-radius:12px;
-    background:#f4f4f4;
+}
+
+.source-links a{
+    padding:8px 14px;
+    border-radius:8px;
+    background:#f3f3f3;
+    color:#e84b2c;
+    font-size:12px;
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+    padding:45px 0 110px;
+    background:#111;
+    color:white;
+    text-align:center;
+}
+
+.footer-logo{
+    font-size:20px;
+    font-weight:bold;
+}
+
+footer p{
+    color:#888;
+    margin-top:5px;
+}
+
+.footer-line{
+    height:1px;
+    background:#292929;
+    margin:30px 0;
+}
+
+footer small{
     color:#666;
+}
+
+
+/* =====================================================
+   STICKY DONATION
+===================================================== */
+
+.sticky-donation{
+    position:fixed;
+    z-index:100;
+    bottom:0;
+    left:0;
+    right:0;
+
+    background:white;
+
+    padding:10px 20px;
+
+    box-shadow:
+    0 -5px 25px rgba(0,0,0,.12);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:30px;
+}
+
+.sticky-donation small,
+.sticky-donation strong{
+    display:block;
+}
+
+.sticky-donation small{
+    color:#777;
     font-size:11px;
 }
 
-@media(max-width:600px){
+.sticky-donation strong{
+    font-size:13px;
+}
 
-    .gallery{
-        grid-template-columns:1fr 1fr;
-        grid-template-rows:200px 200px 200px;
+.sticky-donation button{
+    border:0;
+    background:#e84b2c;
+    color:white;
+
+    padding:12px 25px;
+    border-radius:9px;
+
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:500;
+
+    display:none;
+
+    align-items:flex-end;
+    justify-content:center;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-overlay{
+    position:absolute;
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+    backdrop-filter:blur(4px);
+}
+
+.modal-box{
+    position:relative;
+    z-index:2;
+
+    width:min(500px,100%);
+
+    padding:35px 25px;
+
+    background:white;
+
+    border-radius:25px 25px 0 0;
+
+    animation:modalUp .25s ease;
+}
+
+@keyframes modalUp{
+    from{
+        transform:translateY(100%);
+    }
+    to{
+        transform:translateY(0);
+    }
+}
+
+.modal-close{
+    position:absolute;
+    top:15px;
+    right:18px;
+
+    width:35px;
+    height:35px;
+
+    border:0;
+    border-radius:50%;
+
+    background:#eee;
+    font-size:22px;
+}
+
+.modal-label{
+    color:#e84b2c;
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.modal-box h2{
+    margin:8px 0 25px;
+}
+
+.nominal-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.nominal-grid button{
+    padding:13px;
+
+    border:1px solid #ddd;
+    border-radius:10px;
+
+    background:white;
+    font-weight:bold;
+}
+
+.nominal-grid button.selected{
+    border-color:#e84b2c;
+    background:#fff0eb;
+    color:#e84b2c;
+}
+
+.selected-amount{
+    display:flex;
+    justify-content:space-between;
+
+    padding:15px;
+    margin-top:20px;
+
+    border-radius:10px;
+    background:#f5f5f5;
+}
+
+.modal-donate{
+    width:100%;
+    padding:15px;
+    margin-top:15px;
+
+    border:0;
+    border-radius:10px;
+
+    background:#e84b2c;
+    color:white;
+    font-weight:bold;
+}
+
+.modal-note{
+    margin-top:12px;
+    text-align:center;
+
+    color:#999;
+    font-size:11px;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:850px){
+
+    .monitor-summary{
+        grid-template-columns:1fr;
     }
 
-    .gallery-item.large{
-        grid-column:span 2;
-        grid-row:auto;
+    .monitor-time{
+        padding-left:0;
+        padding-top:18px;
+
+        border-left:0;
+        border-top:1px solid rgba(255,255,255,.15);
+    }
+
+    .region-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .needs-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .steps{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .story-grid{
+        grid-template-columns:1fr;
+    }
+
+    .transparency-card{
+        grid-template-columns:1fr;
+    }
+
+    .air-panel{
+        grid-template-columns:55px 1fr;
+    }
+
+    .air-actions{
+        grid-column:1/-1;
+    }
+
+    .air-actions a{
+        width:100%;
+        text-align:center;
+    }
+}
+
+
+@media(max-width:600px){
+
+    .container{
+        width:calc(100% - 28px);
+    }
+
+    .header-button{
+        display:none;
+    }
+
+    .hero{
+        min-height:650px;
+        padding-bottom:45px;
+    }
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .donation-card{
+        padding:22px;
+    }
+
+    .donation-card h2{
+        font-size:27px;
+    }
+
+    .region-grid,
+    .needs-grid,
+    .steps{
+        grid-template-columns:1fr;
     }
 
     .story-image{
-        min-height:360px;
+        min-height:350px;
     }
 
-}
-</style>
+    .gallery{
+        grid-template-columns:1fr 1fr;
+        grid-template-rows:160px 160px;
+    }
 
+    .gallery-item.large{
+        grid-row:auto;
+    }
+
+    .transparency-stats{
+        grid-template-columns:1fr;
+    }
+
+    .testimonial{
+        padding:30px 20px;
+    }
+
+    .testimonial p{
+        font-size:17px;
+    }
+
+    .sticky-donation{
+        justify-content:space-between;
+        gap:10px;
+        padding:9px 12px;
+    }
+
+    .sticky-donation button{
+        padding:11px 20px;
+    }
+
+    .nominal-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .monitor-main{
+        align-items:flex-start;
+    }
+
+    .monitor-icon{
+        width:52px;
+        height:52px;
+        font-size:25px;
+    }
+
+    .monitor-main h3{
+        font-size:20px;
+    }
+
+    .monitor-main p{
+        font-size:12px;
+    }
+
+    .region-image{
+        height:200px;
+    }
+
+    .region-content>p{
+        min-height:auto;
+    }
+
+    .air-panel{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+
+    .air-icon{
+        margin:auto;
+    }
+
+    .air-actions{
+        grid-column:auto;
+    }
+}
+
+</style>
 </head>
+
 
 <body>
 
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
 <header class="header">
 
-<div class="header-container">
+    <div class="header-container">
 
-<a href="#" class="logo">
+        <a href="#" class="logo">
 
-<span class="logo-fire">🔥</span>
+            <span class="logo-fire">🔥</span>
 
-<span>
-Bantu<span>Kalimantan</span>
-</span>
+            <span>
+                Bantu<span>Kalimantan</span>
+            </span>
 
-</a>
+        </a>
 
-<a href="#donasi" class="header-button">
-Donasi Sekarang
-</a>
+        <a href="#donasi" class="header-button">
+            Donasi Sekarang
+        </a>
 
-</div>
+    </div>
 
 </header>
 
 
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
 <section class="hero">
 
-<div class="hero-overlay"></div>
+    <div class="hero-overlay"></div>
 
-<div class="hero-content">
+    <div class="hero-content">
 
-<div class="campaign-label">
-🔥 PEDULI KARHUTLA 2026
-</div>
+        <div class="campaign-label">
+            🔥 PEDULI KARHUTLA 2026
+        </div>
 
-<h1>
-Bantu Kalimantan
-<span>Bernapas Lagi</span>
-</h1>
+        <h1>
+            Bantu Kalimantan
+            <span>Bernapas Lagi</span>
+        </h1>
 
-<p>
-Kebakaran hutan dan lahan berdampak pada
-lingkungan dan masyarakat di sejumlah wilayah
-Kalimantan. Mari bersama mendukung bantuan
-yang terverifikasi dan dapat dipertanggungjawabkan.
-</p>
+        <p>
+            Mari bersama mendukung masyarakat,
+            relawan, dan upaya penanganan dampak
+            kebakaran hutan dan lahan di Kalimantan.
+        </p>
 
-<a href="#donasi" class="primary-button">
-❤️ Donasi Sekarang
-</a>
+        <a href="#donasi" class="primary-button">
+            ❤️ Donasi Sekarang
+        </a>
 
-<p class="hero-source">
-Dokumentasi: Kalimantan, Agustus 2026 —
-PadukaYash, CC BY 4.0.
-</p>
+        <p class="hero-source">
+            Informasi situasi perlu diperbarui
+            berdasarkan sumber resmi dan terverifikasi.
+        </p>
 
-</div>
+    </div>
 
 </section>
 
 
-<main>
 
+<!-- =====================================================
+     DONASI
+===================================================== -->
 
 <section class="donation-section" id="donasi">
 
-<div class="container">
+    <div class="container">
 
-<div class="donation-card">
+        <div class="donation-card">
 
-<div class="donation-top">
+            <div class="donation-top">
 
-<div>
+                <div>
 
-<p class="small-title">
-Donasi terkumpul
-</p>
+                    <p class="small-title">
+                        Donasi terkumpul
+                    </p>
 
-<h2 id="donationAmount">
-Rp0
-</h2>
+                    <h2 id="donationAmount">
+                        Rp0
+                    </h2>
 
-</div>
+                </div>
 
-<div class="donor-count">
+                <div class="donor-count">
 
-<strong id="donorCount">
-0
-</strong>
+                    <strong id="donorCount">
+                        0
+                    </strong>
 
-<span>
-Donatur
-</span>
+                    <span>
+                        Donatur
+                    </span>
 
-</div>
+                </div>
 
-</div>
-
-
-<div class="progress-wrapper">
-
-<div class="progress-bar">
-
-<div
-class="progress-value"
-id="progressBar">
-</div>
-
-</div>
-
-</div>
+            </div>
 
 
-<div class="progress-info">
+            <div class="progress-wrapper">
 
-<span>
+                <div class="progress-bar">
 
-<strong id="progressPercent">
-0%
-</strong>
+                    <div
+                        class="progress-value"
+                        id="progressBar">
+                    </div>
 
-tercapai
+                </div>
 
-</span>
-
-<span>
-
-Target
-<strong>
-Rp100.000.000
-</strong>
-
-</span>
-
-</div>
+            </div>
 
 
-<button
-class="donate-main-button"
-onclick="openDonation()">
+            <div class="progress-info">
 
-❤️ Bantu Sekarang
+                <span>
 
-</button>
+                    <strong id="progressPercent">
+                        0%
+                    </strong>
+
+                    tercapai
+
+                </span>
+
+                <span>
+                    Target
+                    <strong>
+                        Rp100.000.000
+                    </strong>
+                </span>
+
+            </div>
 
 
-<p class="campaign-note">
+            <button
+                class="donate-main-button"
+                onclick="openDonation()">
 
-Target Rp100.000.000 merupakan target
-campaign, bukan data pemerintah.
+                ❤️ Bantu Sekarang
 
-</p>
+            </button>
 
-</div>
 
-</div>
+            <p class="campaign-note">
+
+                Target merupakan target campaign
+                dan bukan data pemerintah.
+
+            </p>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<section class="situation-section">
 
-<div class="container">
+<!-- =====================================================
+     SITUASI KALIMANTAN
+===================================================== -->
 
-<div class="section-heading">
+<section class="situation-section" id="situasi">
 
-<span>
-SITUASI TERKINI
-</span>
+    <div class="container">
 
-<h2>
-Karhutla masih menjadi perhatian
-di sejumlah wilayah Kalimantan.
-</h2>
+        <div class="section-heading">
 
-<p>
-Pemerintah terus melakukan pemantauan,
-pencegahan, dan penanganan karhutla.
-</p>
+            <span>
+                🔥 PEMANTAUAN KALIMANTAN
+            </span>
 
-</div>
+            <h2>
+                Melihat kondisi,
+                <em>peduli bersama.</em>
+            </h2>
 
+            <p>
+                Kondisi kebakaran hutan dan lahan dapat
+                berubah. Informasi harus selalu mengacu
+                pada laporan resmi dan verifikasi lapangan.
+            </p>
 
-<div class="situation-grid">
-
-<div class="situation-card">
-
-<div class="situation-icon">📍</div>
-
-<strong>
-Kalimantan Barat
-</strong>
-
-<p>
-Kualitas udara dan kondisi karhutla
-terus dipantau oleh pemerintah.
-</p>
-
-</div>
+        </div>
 
 
-<div class="situation-card">
+        <!-- STATUS -->
 
-<div class="situation-icon">🔥</div>
+        <div class="monitor-summary">
 
-<strong>
-Kalimantan Tengah
-</strong>
+            <div class="monitor-main">
 
-<p>
-Wilayah Kalimantan Tengah termasuk
-wilayah prioritas penanganan.
-</p>
+                <div class="monitor-icon">
+                    🔥
+                </div>
 
-</div>
+                <div>
+
+                    <span class="monitor-label">
+                        STATUS PEMANTAUAN
+                    </span>
+
+                    <h3>
+                        Karhutla menjadi perhatian
+                    </h3>
+
+                    <p>
+                        Mari membantu masyarakat terdampak
+                        dan mendukung pihak yang bekerja
+                        menangani kondisi di lapangan.
+                    </p>
+
+                </div>
+
+            </div>
 
 
-<div class="situation-card">
+            <div class="monitor-time">
 
-<div class="situation-icon">🌳</div>
+                <span>
+                    CAMPAIGN
+                </span>
 
-<strong>
-Kalimantan Selatan
-</strong>
+                <strong>
+                    2026
+                </strong>
 
-<p>
-Pemantauan hotspot dan kondisi
-lapangan terus dilakukan.
-</p>
+                <small>
+                    Perbarui informasi
+                    secara berkala
+                </small>
 
-</div>
+            </div>
+
+        </div>
 
 
-<div class="situation-card">
 
-<div class="situation-icon">🛰️</div>
+        <!-- PROVINSI -->
 
-<strong>
-Pemantauan Hotspot
-</strong>
+        <div class="region-grid">
 
-<p>
-Hotspot adalah indikasi dari satelit
-dan tetap membutuhkan verifikasi lapangan.
-</p>
 
-</div>
+            <!-- KALBAR -->
 
-</div>
+            <article class="region-card">
 
-</div>
+                <div class="region-image kalbar-image">
+
+                    <span>🌿</span>
+
+                    <div class="region-badge">
+                        DIPANTAU
+                    </div>
+
+                </div>
+
+                <div class="region-content">
+
+                    <div class="region-title">
+
+                        <div>
+
+                            <span class="region-number">
+                                01
+                            </span>
+
+                            <h3>
+                                Kalimantan Barat
+                            </h3>
+
+                        </div>
+
+                        <span class="status-dot">
+                            ●
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Kondisi kualitas udara dan potensi
+                        karhutla perlu terus dipantau
+                        melalui informasi resmi.
+                    </p>
+
+                    <div class="region-info">
+
+                        <span>📍 Kalbar</span>
+
+                        <span>🛰️ Dipantau</span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- KALTENG -->
+
+            <article class="region-card">
+
+                <div class="region-image kalteng-image">
+
+                    <span>🔥</span>
+
+                    <div class="region-badge">
+                        PERHATIAN
+                    </div>
+
+                </div>
+
+                <div class="region-content">
+
+                    <div class="region-title">
+
+                        <div>
+
+                            <span class="region-number">
+                                02
+                            </span>
+
+                            <h3>
+                                Kalimantan Tengah
+                            </h3>
+
+                        </div>
+
+                        <span class="status-dot">
+                            ●
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Ekosistem gambut membutuhkan
+                        perhatian terhadap risiko
+                        kebakaran dan asap.
+                    </p>
+
+                    <div class="region-info">
+
+                        <span>📍 Kalteng</span>
+
+                        <span>🔥 Waspada</span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- KALSEL -->
+
+            <article class="region-card">
+
+                <div class="region-image kalsel-image">
+
+                    <span>🌳</span>
+
+                    <div class="region-badge">
+                        DIPANTAU
+                    </div>
+
+                </div>
+
+                <div class="region-content">
+
+                    <div class="region-title">
+
+                        <div>
+
+                            <span class="region-number">
+                                03
+                            </span>
+
+                            <h3>
+                                Kalimantan Selatan
+                            </h3>
+
+                        </div>
+
+                        <span class="status-dot">
+                            ●
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Pemantauan titik panas dan
+                        kondisi lapangan perlu dilakukan
+                        secara berkala.
+                    </p>
+
+                    <div class="region-info">
+
+                        <span>📍 Kalsel</span>
+
+                        <span>🛰️ Dipantau</span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- KALTIM -->
+
+            <article class="region-card">
+
+                <div class="region-image kaltim-image">
+
+                    <span>🌲</span>
+
+                    <div class="region-badge">
+                        DIPANTAU
+                    </div>
+
+                </div>
+
+                <div class="region-content">
+
+                    <div class="region-title">
+
+                        <div>
+
+                            <span class="region-number">
+                                04
+                            </span>
+
+                            <h3>
+                                Kalimantan Timur
+                            </h3>
+
+                        </div>
+
+                        <span class="status-dot">
+                            ●
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Informasi kejadian kebakaran
+                        sebaiknya mengacu pada laporan
+                        resmi dan verifikasi lapangan.
+                    </p>
+
+                    <div class="region-info">
+
+                        <span>📍 Kaltim</span>
+
+                        <span>🛰️ Dipantau</span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- KALTARA -->
+
+            <article class="region-card">
+
+                <div class="region-image kaltara-image">
+
+                    <span>🌴</span>
+
+                    <div class="region-badge">
+                        DIPANTAU
+                    </div>
+
+                </div>
+
+                <div class="region-content">
+
+                    <div class="region-title">
+
+                        <div>
+
+                            <span class="region-number">
+                                05
+                            </span>
+
+                            <h3>
+                                Kalimantan Utara
+                            </h3>
+
+                        </div>
+
+                        <span class="status-dot">
+                            ●
+                        </span>
+
+                    </div>
+
+                    <p>
+                        Pemantauan wilayah membantu
+                        memahami perkembangan kondisi
+                        dan kebutuhan bantuan.
+                    </p>
+
+                    <div class="region-info">
+
+                        <span>📍 Kaltara</span>
+
+                        <span>🛰️ Dipantau</span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- HOTSPOT -->
+
+            <article class="hotspot-card">
+
+                <div class="hotspot-top">
+
+                    <div class="satellite-icon">
+                        🛰️
+                    </div>
+
+                    <span>
+                        PEMANTAUAN
+                    </span>
+
+                </div>
+
+                <h3>
+                    Pemantauan Hotspot
+                </h3>
+
+                <p>
+                    Hotspot merupakan indikasi dari
+                    penginderaan satelit dan tidak
+                    otomatis berarti telah terjadi
+                    kebakaran.
+                </p>
+
+                <div class="hotspot-line">
+
+                    <div class="pulse"></div>
+
+                    <span>
+                        Tetap perlu verifikasi lapangan
+                    </span>
+
+                </div>
+
+                <a
+                    href="#sumber"
+                    class="monitor-link">
+
+                    Lihat sumber informasi →
+
+                </a>
+
+            </article>
+
+        </div>
+
+
+
+        <!-- UDARA -->
+
+        <div class="air-panel">
+
+            <div class="air-icon">
+                💨
+            </div>
+
+            <div class="air-content">
+
+                <span>
+                    KUALITAS UDARA
+                </span>
+
+                <h3>
+                    Lindungi diri dari paparan asap
+                </h3>
+
+                <p>
+                    Jika berada di wilayah terdampak,
+                    perhatikan informasi kualitas udara
+                    dan ikuti anjuran resmi.
+                </p>
+
+            </div>
+
+            <div class="air-actions">
+
+                <a href="#donasi">
+                    Bantu kebutuhan
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="monitor-note">
+
+            <span>ℹ️</span>
+
+            <p>
+                Panel ini merupakan informasi campaign,
+                bukan sistem peringatan darurat.
+                Untuk keadaan darurat, ikuti arahan
+                pemerintah dan petugas setempat.
+            </p>
+
+        </div>
+
+    </div>
 
 </section>
 
+
+
+<!-- =====================================================
+     STORY
+===================================================== -->
 
 <section class="story-section">
 
-<div class="container">
+    <div class="container">
 
-<div class="section-heading">
+        <div class="section-heading">
 
-<span>
-KENAPA KITA PEDULI?
-</span>
+            <span>
+                KENAPA KITA PEDULI?
+            </span>
 
-<h2>
-Ketika hutan terbakar,
-<em>dampaknya terasa.</em>
-</h2>
+            <h2>
+                Ketika hutan terbakar,
+                <em>dampaknya terasa.</em>
+            </h2>
 
-</div>
-
-
-<div class="story-grid">
-
-<div class="story-image">
-
-<div class="image-placeholder">
-
-<strong>
-KABUT ASAP KALIMANTAN
-</strong>
-
-<small>
-Palangka Raya · Agustus 2026
-</small>
-
-</div>
-
-</div>
+        </div>
 
 
-<div class="story-content">
+        <div class="story-grid">
 
-<p>
-Kebakaran hutan dan lahan dapat
-berdampak pada lingkungan,
-kualitas udara, aktivitas masyarakat,
-dan habitat satwa.
-</p>
 
-<p>
-Dukungan dapat diarahkan untuk
-kebutuhan bantuan yang benar-benar
-terverifikasi di wilayah sasaran.
-</p>
+            <div class="story-image">
 
-<p>
-Campaign ini dibuat untuk menjadi
-wadah informasi dan penggalangan
-bantuan secara transparan.
-</p>
+                <div class="story-image-content">
 
-<strong>
-Bersama, kita bisa membantu
-mereka yang membutuhkan.
-</strong>
+                    <div class="big">
+                        🔥
+                    </div>
 
-</div>
+                    <h3>
+                        JAGA KALIMANTAN
+                    </h3>
 
-</div>
+                    <p>
+                        Dukung masyarakat dan
+                        upaya penanganan karhutla.
+                    </p>
 
-</div>
+                </div>
+
+            </div>
+
+
+            <div class="story-content">
+
+                <p>
+                    Kebakaran hutan dan lahan dapat
+                    berdampak pada lingkungan,
+                    kesehatan masyarakat, serta
+                    aktivitas warga di sekitar wilayah
+                    terdampak.
+                </p>
+
+                <p>
+                    Dalam kondisi karhutla, dukungan
+                    untuk kebutuhan dasar masyarakat
+                    dan relawan dapat menjadi sangat
+                    berarti.
+                </p>
+
+                <p>
+                    Campaign ini dibuat sebagai wadah
+                    untuk menggalang bantuan yang
+                    nantinya disalurkan sesuai kebutuhan
+                    dan mekanisme yang dapat
+                    dipertanggungjawabkan.
+                </p>
+
+                <strong>
+                    Bersama, kita bisa membantu
+                    mereka yang membutuhkan. ❤️
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
+
+
+<!-- =====================================================
+     NEEDS
+===================================================== -->
 
 <section class="needs-section">
 
-<div class="container">
+    <div class="container">
 
-<div class="section-heading center">
+        <div class="section-heading center">
 
-<span>
-KEBUTUHAN BANTUAN
-</span>
+            <span>
+                KEBUTUHAN BANTUAN
+            </span>
 
-<h2>
-Untuk apa donasimu?
-</h2>
+            <h2>
+                Untuk apa donasimu?
+            </h2>
 
-<p>
-Penggunaan dana disesuaikan dengan
-kebutuhan bantuan yang terverifikasi.
-</p>
+            <p>
+                Penggunaan dana akan disesuaikan
+                dengan kebutuhan bantuan yang
+                terverifikasi.
+            </p>
 
-</div>
-
-
-<div class="needs-grid">
-
-<div class="need-card">
-
-<div class="need-icon">😷</div>
-
-<h3>
-Masker & Perlindungan
-</h3>
-
-<p>
-Mendukung kebutuhan perlindungan
-masyarakat dari paparan asap.
-</p>
-
-</div>
+        </div>
 
 
-<div class="need-card">
-
-<div class="need-icon">💧</div>
-
-<h3>
-Air & Minuman
-</h3>
-
-<p>
-Membantu kebutuhan dasar masyarakat
-di lokasi bantuan.
-</p>
-
-</div>
+        <div class="needs-grid">
 
 
-<div class="need-card">
+            <div class="need-card">
 
-<div class="need-icon">🍱</div>
+                <div class="need-icon">
+                    😷
+                </div>
 
-<h3>
-Logistik
-</h3>
+                <h3>
+                    Masker & Perlindungan
+                </h3>
 
-<p>
-Mendukung makanan dan kebutuhan
-logistik sesuai kondisi lapangan.
-</p>
+                <p>
+                    Mendukung kebutuhan perlindungan
+                    masyarakat dari paparan asap.
+                </p>
 
-</div>
+            </div>
 
 
-<div class="need-card">
+            <div class="need-card">
 
-<div class="need-icon">🩺</div>
+                <div class="need-icon">
+                    💧
+                </div>
 
-<h3>
-Dukungan Kesehatan
-</h3>
+                <h3>
+                    Air & Minuman
+                </h3>
 
-<p>
-Mendukung kebutuhan kesehatan
-sesuai kebutuhan wilayah sasaran.
-</p>
+                <p>
+                    Membantu kebutuhan air minum
+                    dan kebutuhan dasar.
+                </p>
 
-</div>
+            </div>
 
-</div>
 
-</div>
+            <div class="need-card">
+
+                <div class="need-icon">
+                    🍱
+                </div>
+
+                <h3>
+                    Logistik
+                </h3>
+
+                <p>
+                    Mendukung makanan dan kebutuhan
+                    logistik sesuai kebutuhan.
+                </p>
+
+            </div>
+
+
+            <div class="need-card">
+
+                <div class="need-icon">
+                    🩺
+                </div>
+
+                <h3>
+                    Dukungan Kesehatan
+                </h3>
+
+                <p>
+                    Membantu kebutuhan pendukung
+                    kesehatan di wilayah sasaran.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
+
+
+<!-- =====================================================
+     CARA MEMBANTU
+===================================================== -->
 
 <section class="how-section">
 
-<div class="container">
+    <div class="container">
 
-<div class="section-heading center">
+        <div class="section-heading center">
 
-<span>
-CARA MEMBANTU
-</span>
+            <span>
+                CARA MEMBANTU
+            </span>
 
-<h2>
-Sederhana. Transparan.
-</h2>
+            <h2>
+                Sederhana. Transparan.
+            </h2>
 
-</div>
-
-
-<div class="steps">
-
-<div class="step">
-
-<div class="step-number">
-01
-</div>
-
-<h3>
-Pilih nominal
-</h3>
-
-<p>
-Tentukan jumlah bantuan.
-</p>
-
-</div>
+        </div>
 
 
-<div class="step">
-
-<div class="step-number">
-02
-</div>
-
-<h3>
-Lakukan pembayaran
-</h3>
-
-<p>
-Gunakan metode pembayaran
-resmi yang tersedia.
-</p>
-
-</div>
+        <div class="steps">
 
 
-<div class="step">
+            <div class="step">
 
-<div class="step-number">
-03
-</div>
+                <div class="step-number">
+                    01
+                </div>
 
-<h3>
-Bantuan dicatat
-</h3>
+                <h3>
+                    Pilih nominal
+                </h3>
 
-<p>
-Data transaksi akan dicatat
-dalam sistem campaign.
-</p>
+                <p>
+                    Tentukan jumlah bantuan
+                    yang ingin diberikan.
+                </p>
 
-</div>
+            </div>
 
 
-<div class="step">
+            <div class="step">
 
-<div class="step-number">
-04
-</div>
+                <div class="step-number">
+                    02
+                </div>
 
-<h3>
-Update bantuan
-</h3>
+                <h3>
+                    Lakukan pembayaran
+                </h3>
 
-<p>
-Perkembangan campaign akan
-diinformasikan secara terbuka.
-</p>
+                <p>
+                    Pembayaran dilakukan melalui
+                    metode resmi yang tersedia.
+                </p>
 
-</div>
+            </div>
 
-</div>
 
-</div>
+            <div class="step">
+
+                <div class="step-number">
+                    03
+                </div>
+
+                <h3>
+                    Bantuan dicatat
+                </h3>
+
+                <p>
+                    Data transaksi nantinya
+                    terhubung dengan sistem campaign.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    04
+                </div>
+
+                <h3>
+                    Update bantuan
+                </h3>
+
+                <p>
+                    Perkembangan campaign dan
+                    penggunaan dana diinformasikan.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
+
+
+<!-- =====================================================
+     GALLERY
+===================================================== -->
 
 <section class="gallery-section">
 
-<div class="container">
+    <div class="container">
 
-<div class="section-heading">
+        <div class="section-heading">
 
-<span>
-DOKUMENTASI 2026
-</span>
+            <span>
+                DOKUMENTASI
+            </span>
 
-<h2>
-Kalimantan dalam dokumentasi.
-</h2>
+            <h2>
+                Cerita dari lapangan
+            </h2>
 
-<p>
-Foto-foto berikut dipilih dari dokumentasi
-yang memiliki keterangan lokasi/tanggal
-dan lisensi yang dapat digunakan.
-</p>
+            <p>
+                Ruang dokumentasi untuk foto kegiatan,
+                bantuan, relawan, dan perkembangan
+                campaign.
+            </p>
 
-</div>
-
-
-<div class="gallery">
+        </div>
 
 
-<div class="gallery-item large">
-
-<div class="gallery-caption">
-
-Kalimantan · Agustus 2026
-
-<small>
-Kabut asap tebal
-</small>
-
-</div>
-
-</div>
+        <div class="gallery">
 
 
-<div class="gallery-item">
+            <div class="gallery-item large">
 
-<div class="gallery-caption">
+                <div class="gallery-text">
 
-Banjarmasin
+                    <strong>
+                        🔥 Penanganan Karhutla
+                    </strong>
 
-<small>
-30 Agustus 2026
-</small>
+                    <small>
+                        Dokumentasi kegiatan
+                    </small>
 
-</div>
+                </div>
 
-</div>
-
-
-<div class="gallery-item">
-
-<div class="gallery-caption">
-
-Palangka Raya
-
-<small>
-18 Agustus 2026
-</small>
-
-</div>
-
-</div>
+            </div>
 
 
-<div class="gallery-item">
+            <div class="gallery-item">
 
-<div class="gallery-caption">
+                <div class="gallery-text">
 
-Berau
+                    <strong>
+                        🌳 Hutan Kalimantan
+                    </strong>
 
-<small>
-Kalimantan Timur
-</small>
+                    <small>
+                        Dokumentasi lingkungan
+                    </small>
 
-</div>
+                </div>
 
-</div>
-
-
-<div class="gallery-item">
-
-<div class="gallery-caption">
-
-Palangka Raya
-
-<small>
-Dokumentasi kabut asap
-</small>
-
-</div>
-
-</div>
+            </div>
 
 
-</div>
+            <div class="gallery-item">
+
+                <div class="gallery-text">
+
+                    <strong>
+                        🤝 Relawan
+                    </strong>
+
+                    <small>
+                        Dukungan kemanusiaan
+                    </small>
+
+                </div>
+
+            </div>
 
 
-<div class="photo-credit">
+            <div class="gallery-item">
 
-📷 Dokumentasi bersumber dari Wikimedia Commons.
-Keterangan lisensi dan atribusi mengikuti halaman
-masing-masing foto.
+                <div class="gallery-text">
 
-</div>
+                    <strong>
+                        💧 Bantuan
+                    </strong>
 
-</div>
+                    <small>
+                        Kebutuhan masyarakat
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="gallery-item">
+
+                <div class="gallery-text">
+
+                    <strong>
+                        🌱 Pemulihan
+                    </strong>
+
+                    <small>
+                        Harapan untuk Kalimantan
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
+
+
+<!-- =====================================================
+     TRANSPARENCY
+===================================================== -->
 
 <section class="transparency-section">
 
-<div class="container">
+    <div class="container">
 
-<div class="transparency-card">
+        <div class="transparency-card">
 
-<div>
+            <div>
 
-<span>
-TRANSPARANSI
-</span>
+                <span>
+                    TRANSPARANSI
+                </span>
 
-<h2>
-Donasi harus bisa
-dipertanggungjawabkan.
-</h2>
+                <h2>
+                    Donasi harus bisa
+                    dipertanggungjawabkan.
+                </h2>
 
-<p>
-Jumlah donasi dan penggunaan dana
-akan diperbarui setelah sistem
-pengelolaan dana terhubung.
-</p>
+                <p>
+                    Setiap perkembangan campaign,
+                    jumlah donasi, dan penggunaan
+                    dana akan ditampilkan secara
+                    terbuka setelah sistem
+                    pengelolaan dana terhubung.
+                </p>
 
-</div>
-
-
-<div class="transparency-stats">
-
-<div>
-
-<strong id="statDonors">
-0
-</strong>
-
-<span>
-Donatur
-</span>
-
-</div>
+            </div>
 
 
-<div>
+            <div class="transparency-stats">
 
-<strong id="statPercent">
-0%
-</strong>
+                <div>
 
-<span>
-Progress
-</span>
+                    <strong id="statDonors">
+                        0
+                    </strong>
 
-</div>
+                    <small>
+                        Donatur
+                    </small>
+
+                </div>
 
 
-<div>
+                <div>
 
-<strong>
-2026
-</strong>
+                    <strong id="statPercent">
+                        0%
+                    </strong>
 
-<span>
-Campaign
-</span>
+                    <small>
+                        Progress
+                    </small>
 
-</div>
+                </div>
 
-</div>
 
-</div>
+                <div>
 
-</div>
+                    <strong>
+                        2026
+                    </strong>
+
+                    <small>
+                        Campaign
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
+
+
+<!-- =====================================================
+     DOA
+===================================================== -->
 
 <section class="testimonial-section">
 
-<div class="container">
+    <div class="container">
 
-<div class="section-heading center">
+        <div class="section-heading center">
 
-<span>
-DOA & DUKUNGAN
-</span>
+            <span>
+                DOA & DUKUNGAN
+            </span>
 
-<h2>
-Satu kepedulian,
-banyak harapan.
-</h2>
+            <h2>
+                Satu kepedulian,
+                banyak harapan.
+            </h2>
 
-</div>
+        </div>
 
 
-<div class="testimonial">
+        <div class="testimonial">
 
-<div class="quote-icon">
-“
-</div>
+            <div class="quote-icon">
+                “
+            </div>
 
-<p>
-Semoga masyarakat yang terdampak
-diberikan kekuatan, para petugas
-dan relawan diberikan keselamatan,
-dan kondisi di wilayah terdampak
-segera membaik.
-</p>
+            <p>
+                Semoga masyarakat yang terdampak
+                diberikan kekuatan, para petugas
+                dan relawan diberikan keselamatan,
+                dan kondisi di wilayah terdampak
+                segera membaik.
+            </p>
 
-<strong>
-Doa kita untuk Kalimantan
-</strong>
+            <strong>
+                Doa kita untuk Kalimantan ❤️
+            </strong>
 
-</div>
+        </div>
 
-</div>
+    </div>
 
 </section>
 
+
+
+<!-- =====================================================
+     SHARE
+===================================================== -->
 
 <section class="share-section">
 
-<div class="container">
+    <div class="container">
 
-<div class="share-card">
+        <div class="share-card">
 
-<div class="share-icon">
-❤️
-</div>
+            <div class="share-icon">
+                ❤️
+            </div>
 
-<h2>
-Tidak bisa berdonasi?
-</h2>
+            <h2>
+                Tidak bisa berdonasi?
+            </h2>
 
-<p>
-Membagikan informasi yang benar
-juga merupakan bentuk kepedulian.
-</p>
+            <p>
+                Membagikan informasi yang benar
+                juga merupakan bentuk kepedulian.
+            </p>
 
-<button
-class="share-button"
-onclick="shareCampaign()">
+            <button
+                class="share-button"
+                onclick="shareCampaign()">
 
-🔗 Bagikan Campaign
+                🔗 Bagikan Campaign
 
-</button>
+            </button>
 
-</div>
+        </div>
 
-</div>
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SOURCES
+===================================================== -->
+
+<section class="sources-section" id="sumber">
+
+    <div class="container">
+
+        <div class="sources-card">
+
+            <h3>
+                Sumber informasi
+            </h3>
+
+            <p>
+                Informasi mengenai kondisi karhutla
+                sebaiknya diperiksa melalui sumber
+                resmi pemerintah dan laporan yang
+                dapat diverifikasi.
+            </p>
+
+            <div class="source-links">
+
+                <a
+                    href="https://www.bnpb.go.id/"
+                    target="_blank"
+                    rel="noopener">
+
+                    BNPB
+
+                </a>
+
+                <a
+                    href="https://www.kehutanan.go.id/"
+                    target="_blank"
+                    rel="noopener">
+
+                    Kementerian Kehutanan
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<section class="sources-section">
 
-<div class="container">
-
-<div class="sources-card">
-
-<h3>
-Sumber informasi
-</h3>
-
-<p>
-Informasi karhutla mengacu pada
-pembaruan resmi pemerintah.
-</p>
-
-<div class="source-links">
-
-<a
-href="https://www.bnpb.go.id/"
-target="_blank"
-rel="noopener">
-BNPB
-</a>
-
-<a
-href="https://www.kehutanan.go.id/"
-target="_blank"
-rel="noopener">
-Kementerian Kehutanan
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-</main>
-
+<!-- =====================================================
+     FOOTER
+===================================================== -->
 
 <footer>
 
-<div class="container">
+    <div class="container">
 
-<div class="footer-logo">
-🔥 Bantu Kalimantan
-</div>
+        <div class="footer-logo">
+            🔥 Bantu Kalimantan
+        </div>
 
-<p>
-Bersama membantu, bersama memulihkan.
-</p>
+        <p>
+            Bersama membantu, bersama memulihkan.
+        </p>
 
-<div class="footer-line"></div>
+        <div class="footer-line"></div>
 
-<small>
-© 2026 Bantu Kalimantan
-</small>
+        <small>
+            © 2026 Bantu Kalimantan
+        </small>
 
-</div>
+    </div>
 
 </footer>
 
 
+
+<!-- =====================================================
+     STICKY DONATION
+===================================================== -->
+
 <div class="sticky-donation">
 
-<div>
+    <div>
 
-<small>
-Mari bantu Kalimantan
-</small>
+        <small>
+            Mari bantu Kalimantan
+        </small>
 
-<strong>
-Setiap bantuan berarti ❤️
-</strong>
+        <strong>
+            Setiap bantuan berarti ❤️
+        </strong>
 
-</div>
+    </div>
 
-<button onclick="openDonation()">
-DONASI
-</button>
-
-</div>
-
-
-<div
-class="modal"
-id="donationModal">
-
-<div
-class="modal-overlay"
-onclick="closeDonation()">
-</div>
-
-<div class="modal-box">
-
-<button
-class="modal-close"
-onclick="closeDonation()">
-×
-</button>
-
-<span class="modal-label">
-❤️ DUKUNG KALIMANTAN
-</span>
-
-<h2>
-Pilih nominal donasi
-</h2>
-
-<div class="nominal-grid">
-
-<button onclick="selectAmount(25000)">
-Rp25K
-</button>
-
-<button onclick="selectAmount(50000)">
-Rp50K
-</button>
-
-<button onclick="selectAmount(100000)">
-Rp100K
-</button>
-
-<button onclick="selectAmount(250000)">
-Rp250K
-</button>
-
-<button onclick="selectAmount(500000)">
-Rp500K
-</button>
-
-<button onclick="selectAmount(1000000)">
-Rp1JT
-</button>
-
-</div>
-
-<div class="selected-amount">
-
-<span>
-Nominal:
-</span>
-
-<strong id="selectedAmount">
-Rp100.000
-</strong>
-
-</div>
-
-<button
-class="modal-donate"
-onclick="processDonation()">
-
-Lanjutkan Donasi ❤️
-
-</button>
-
-<p class="modal-note">
-
-Metode pembayaran sedang dipersiapkan.
-QRIS akan dihubungkan setelah akun
-pembayaran siap.
-
-</p>
-
-</div>
+    <button onclick="openDonation()">
+        DONASI
+    </button>
 
 </div>
 
 
-<script src="script.js"></script>
+
+<!-- =====================================================
+     DONATION MODAL
+===================================================== -->
+
+<div class="modal" id="donationModal">
+
+    <div
+        class="modal-overlay"
+        onclick="closeDonation()">
+    </div>
+
+
+    <div class="modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeDonation()">
+
+            ×
+
+        </button>
+
+
+        <span class="modal-label">
+            ❤️ DUKUNG KALIMANTAN
+        </span>
+
+
+        <h2>
+            Pilih nominal donasi
+        </h2>
+
+
+        <div class="nominal-grid">
+
+            <button onclick="selectAmount(25000)">
+                Rp25K
+            </button>
+
+            <button onclick="selectAmount(50000)">
+                Rp50K
+            </button>
+
+            <button onclick="selectAmount(100000)">
+                Rp100K
+            </button>
+
+            <button onclick="selectAmount(250000)">
+                Rp250K
+            </button>
+
+            <button onclick="selectAmount(500000)">
+                Rp500K
+            </button>
+
+            <button onclick="selectAmount(1000000)">
+                Rp1JT
+            </button>
+
+        </div>
+
+
+        <div class="selected-amount">
+
+            <span>
+                Nominal:
+            </span>
+
+            <strong id="selectedAmount">
+                Rp100.000
+            </strong>
+
+        </div>
+
+
+        <button
+            class="modal-donate"
+            onclick="processDonation()">
+
+            Lanjutkan Donasi ❤️
+
+        </button>
+
+
+        <p class="modal-note">
+
+            Metode pembayaran sedang dipersiapkan.
+            QRIS akan dihubungkan setelah akun
+            pembayaran siap.
+
+        </p>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+let selectedDonation = 100000;
+
+
+/* DONATION MODAL */
+
+function openDonation(){
+
+    document
+    .getElementById("donationModal")
+    .classList
+    .add("active");
+
+}
+
+
+function closeDonation(){
+
+    document
+    .getElementById("donationModal")
+    .classList
+    .remove("active");
+
+}
+
+
+/* SELECT AMOUNT */
+
+function selectAmount(amount){
+
+    selectedDonation = amount;
+
+    document
+    .getElementById("selectedAmount")
+    .innerText =
+    "Rp" +
+    amount.toLocaleString("id-ID");
+
+
+    document
+    .querySelectorAll(".nominal-grid button")
+    .forEach(function(button){
+
+        button.classList.remove("selected");
+
+    });
+
+
+    event.target.classList.add("selected");
+
+}
+
+
+/* DONATION */
+
+function processDonation(){
+
+    alert(
+        "Metode pembayaran / QRIS akan dihubungkan setelah sistem pembayaran siap."
+    );
+
+}
+
+
+/* SHARE */
+
+function shareCampaign(){
+
+    const shareData = {
+
+        title:
+        "Bantu Kalimantan",
+
+        text:
+        "Mari bersama membantu Kalimantan ❤️",
+
+        url:
+        window.location.href
+
+    };
+
+
+    if(
+        navigator.share
+    ){
+
+        navigator.share(shareData);
+
+    }else{
+
+        navigator.clipboard
+        .writeText(window.location.href)
+        .then(function(){
+
+            alert(
+                "Link campaign berhasil disalin."
+            );
+
+        });
+
+    }
+
+}
+
+
+/* DEMO DATA */
+
+const target =
+100000000;
+
+const donation =
+0;
+
+const donors =
+0;
+
+
+const percent =
+Math.min(
+    100,
+    (donation / target) * 100
+);
+
+
+document
+.getElementById("donationAmount")
+.innerText =
+"Rp" +
+donation.toLocaleString("id-ID");
+
+
+document
+.getElementById("donorCount")
+.innerText =
+donors;
+
+
+document
+.getElementById("progressPercent")
+.innerText =
+percent.toFixed(0) + "%";
+
+
+document
+.getElementById("progressBar")
+.style.width =
+percent + "%";
+
+
+document
+.getElementById("statDonors")
+.innerText =
+donors;
+
+
+document
+.getElementById("statPercent")
+.innerText =
+percent.toFixed(0) + "%";
+
+
+/* DEFAULT NOMINAL */
+
+document
+.querySelector(".nominal-grid button:nth-child(3)")
+.classList
+.add("selected");
+
+
+</script>
 
 </body>
 </html>
