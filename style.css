@@ -1,1371 +1,1619 @@
+/* =========================================================
+   BANTU KALIMANTAN 2026
+   FINAL CSS
+   ========================================================= */
+
 :root {
-    --primary: #e84b2c;
-    --primary-dark: #c9361d;
-    --dark: #171717;
-    --text: #222;
-    --muted: #707070;
-    --light: #f7f6f2;
-    --white: #fff;
-    --border: #e8e6e1;
+  --orange: #f04428;
+  --orange-dark: #d9361d;
+  --orange-soft: #fff0eb;
+  --green: #123c2b;
+  --green-light: #1d6245;
+  --cream: #faf8f4;
+  --white: #ffffff;
+  --black: #17201d;
+  --muted: #69716e;
+  --line: #e8e6e1;
+  --shadow: 0 20px 55px rgba(25, 30, 28, .10);
+  --radius: 24px;
+  --container: 1120px;
 }
 
+
+/* RESET */
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-    scroll-behavior: smooth;
-    overflow-x: hidden;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: var(--light);
-    color: var(--text);
-    line-height: 1.6;
-    padding-bottom: 82px;
-    overflow-x: hidden;
+  font-family: "DM Sans", sans-serif;
+  background: var(--white);
+  color: var(--black);
+  line-height: 1.6;
+  overflow-x: hidden;
 }
 
 img {
-    max-width: 100%;
-    display: block;
+  display: block;
+  max-width: 100%;
 }
 
+button,
 a {
-    text-decoration: none;
-    color: inherit;
+  font-family: inherit;
 }
 
 button {
-    font-family: inherit;
-    cursor: pointer;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+section {
+  position: relative;
 }
 
 .container {
-    width: min(1100px, calc(100% - 32px));
-    margin: auto;
+  width: min(var(--container), calc(100% - 40px));
+  margin: 0 auto;
 }
 
 
-/* =========================
+/* =========================================================
    HEADER
-========================= */
+   ========================================================= */
 
-.header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 20;
-    color: white;
+.site-header {
+  position: absolute;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: white;
 }
 
-.header-container {
-    width: min(1100px, calc(100% - 32px));
-    margin: auto;
-    padding: 20px 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.nav {
+  height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    font-size: 20px;
-    font-weight: 800;
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
-.logo-fire {
-    font-size: 24px;
+.brand-fire {
+  font-size: 27px;
 }
 
-.logo > span > span {
-    color: #ffb29d;
+.brand strong {
+  display: block;
+  font-family: "Manrope", sans-serif;
+  font-size: 16px;
+  line-height: 1.1;
 }
 
-.header-button {
-    padding: 9px 16px;
+.brand small {
+  display: block;
+  opacity: .72;
+  font-size: 10px;
+  margin-top: 3px;
+}
 
-    border: 1px solid rgba(255,255,255,.5);
-    border-radius: 30px;
+.desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-left: auto;
+}
 
-    font-size: 13px;
-    font-weight: bold;
+.desktop-nav a {
+  font-size: 13px;
+  font-weight: 600;
+  opacity: .88;
+  transition: .25s ease;
+}
 
-    background: rgba(0,0,0,.15);
+.desktop-nav a:hover {
+  color: #ffd4ca;
+  opacity: 1;
+}
+
+.header-donate {
+  border: 0;
+  color: white;
+  background: var(--orange);
+  padding: 12px 19px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 12px;
+  transition: .25s ease;
+}
+
+.header-donate:hover {
+  transform: translateY(-2px);
+  background: #ff5b3f;
 }
 
 
-/* =========================
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn {
+  border: 0;
+  min-height: 48px;
+  padding: 0 23px;
+  border-radius: 999px;
+  font-weight: 800;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: .25s ease;
+}
+
+.btn-primary {
+  background: var(--orange);
+  color: white;
+  box-shadow: 0 12px 28px rgba(240, 68, 40, .28);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  background: #ff573b;
+}
+
+.btn-ghost {
+  border: 1px solid rgba(255,255,255,.45);
+  color: white;
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(10px);
+}
+
+.btn-ghost:hover {
+  background: rgba(255,255,255,.17);
+}
+
+
+/* =========================================================
    HERO
-========================= */
+   ========================================================= */
 
 .hero {
-    min-height: 680px;
+  min-height: 720px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background: #18201d;
+  color: white;
+}
 
-    position: relative;
+.hero-photo {
+  position: absolute;
+  inset: 0;
 
-    display: flex;
-    align-items: flex-end;
+  background-image:
+    url("https://commons.wikimedia.org/wiki/Special:FilePath/Kalimantan%20Forest%20Fires.jpg");
 
-    padding: 100px 20px 60px;
-
-    color: white;
-
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(20,10,8,.15),
-            rgba(20,10,8,.9)
-        ),
-        url("images/hero.jpg");
-
-    background-size: cover;
-    background-position: center;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.02);
 }
 
 .hero-overlay {
-    position: absolute;
-    inset: 0;
+  position: absolute;
+  inset: 0;
 
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(0,0,0,.05),
-            rgba(0,0,0,.75)
-        );
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5,12,9,.91) 0%,
+      rgba(5,12,9,.68) 42%,
+      rgba(5,12,9,.30) 75%,
+      rgba(5,12,9,.54) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(5,12,9,.65),
+      transparent 50%
+    );
 }
 
 .hero-content {
-    position: relative;
-    z-index: 2;
+  position: relative;
+  z-index: 2;
 
-    width: min(780px, 100%);
-    margin: auto;
+  padding-top: 95px;
+  padding-bottom: 70px;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  align-items: center;
+  gap: 75px;
 }
 
-.campaign-label {
-    display: inline-block;
+.hero-copy {
+  max-width: 650px;
+}
 
-    padding: 7px 13px;
+.eyebrow {
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
 
-    border-radius: 30px;
-
-    background: rgba(255,255,255,.12);
-    border: 1px solid rgba(255,255,255,.25);
-
-    font-size: 12px;
-    font-weight: bold;
-
-    margin-bottom: 18px;
+.eyebrow.light {
+  color: #ffd0c5;
 }
 
 .hero h1 {
-    font-size: clamp(43px, 8vw, 80px);
-
-    line-height: .98;
-
-    letter-spacing: -3px;
-
-    margin-bottom: 24px;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(46px, 7vw, 76px);
+  line-height: .98;
+  letter-spacing: -3px;
+  margin-bottom: 24px;
 }
 
 .hero h1 span {
-    display: block;
-    color: #ffd0bd;
+  color: #ff674a;
 }
 
-.hero p {
-    max-width: 650px;
-
-    font-size: 17px;
-
-    color: #eee;
-
-    margin-bottom: 25px;
+.hero-copy > p {
+  max-width: 610px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: rgba(255,255,255,.86);
 }
 
-.primary-button {
-    display: inline-block;
-
-    padding: 15px 25px;
-
-    background: white;
-    color: var(--primary);
-
-    border-radius: 11px;
-
-    font-weight: 800;
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 30px;
 }
 
-.hero-source {
-    margin-top: 13px;
-
-    font-size: 11px !important;
-
-    color: rgba(255,255,255,.65) !important;
+.hero-note {
+  margin-top: 23px;
+  font-size: 11px;
+  color: rgba(255,255,255,.62);
 }
 
 
-/* =========================
-   DONATION
-========================= */
-
-.donation-section {
-    position: relative;
-
-    margin-top: -35px;
-
-    z-index: 5;
-}
+/* DONATION CARD */
 
 .donation-card {
-    background: white;
-
-    padding: 28px;
-
-    border-radius: 20px;
-
-    box-shadow:
-        0 15px 40px rgba(0,0,0,.1);
+  background: rgba(255,255,255,.97);
+  color: var(--black);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: 0 30px 70px rgba(0,0,0,.28);
 }
 
-.donation-top {
-    display: flex;
-
-    justify-content: space-between;
-
-    gap: 20px;
+.card-label {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: var(--muted);
 }
 
-.small-title {
-    color: var(--muted);
-
-    font-size: 13px;
+.money {
+  color: var(--orange);
+  font-family: "Manrope", sans-serif;
+  font-size: 33px;
+  font-weight: 800;
+  margin-top: 4px;
 }
 
-.donation-card h2 {
-    font-size: 31px;
+.target-text {
+  font-size: 12px;
+  color: var(--muted);
 }
 
-.donor-count {
-    text-align: right;
+.progress {
+  height: 9px;
+  background: #ececeb;
+  border-radius: 99px;
+  overflow: hidden;
+  margin-top: 17px;
 }
 
-.donor-count strong {
-    display: block;
-
-    font-size: 24px;
-}
-
-.donor-count span {
-    color: var(--muted);
-
-    font-size: 12px;
-}
-
-.progress-wrapper {
-    margin-top: 20px;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 11px;
-
-    background: #eee;
-
-    border-radius: 20px;
-
-    overflow: hidden;
-}
-
-.progress-value {
-    width: 0;
-    height: 100%;
-
-    background: var(--primary);
-
-    border-radius: 20px;
-
-    transition: width 1s ease;
+.progress span {
+  display: block;
+  height: 100%;
+  background: var(--orange);
+  border-radius: inherit;
 }
 
 .progress-info {
-    display: flex;
-
-    justify-content: space-between;
-
-    gap: 10px;
-
-    margin-top: 9px;
-
-    font-size: 12px;
-
-    color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 8px;
 }
 
-.progress-info strong {
-    color: var(--primary);
+.card-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  border-top: 1px solid var(--line);
+  margin-top: 22px;
+  padding-top: 18px;
 }
 
-.donate-main-button {
-    width: 100%;
-
-    margin-top: 20px;
-
-    padding: 15px;
-
-    border: 0;
-
-    border-radius: 10px;
-
-    background: var(--primary);
-
-    color: white;
-
-    font-weight: 800;
-
-    font-size: 16px;
+.card-stats div {
+  text-align: center;
 }
 
-.campaign-note {
-    text-align: center;
+.card-stats strong {
+  display: block;
+  font-size: 16px;
+}
 
-    margin-top: 10px;
+.card-stats span {
+  display: block;
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 3px;
+}
 
-    color: #999;
+.card-button {
+  width: 100%;
+  margin-top: 22px;
+  background: var(--orange);
+  color: white;
+}
 
-    font-size: 10px;
+.card-button:hover {
+  background: var(--orange-dark);
+  transform: translateY(-2px);
+}
+
+.small-note {
+  text-align: center;
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 12px;
 }
 
 
-/* =========================
-   HEADING
-========================= */
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+.section {
+  padding: 95px 0;
+}
+
+.impact {
+  background: var(--cream);
+}
 
 .section-heading {
-    max-width: 700px;
-
-    margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: 1fr 430px;
+  gap: 70px;
+  align-items: end;
+  margin-bottom: 42px;
 }
 
-.section-heading.center {
-    margin-left: auto;
-    margin-right: auto;
-
-    text-align: center;
-}
-
-.section-heading > span {
-    color: var(--primary);
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    letter-spacing: 2px;
+.section-heading.centered {
+  display: block;
+  text-align: center;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section-heading h2 {
-    font-size: clamp(30px, 5vw, 50px);
-
-    line-height: 1.05;
-
-    letter-spacing: -1.5px;
-
-    margin-top: 9px;
-}
-
-.section-heading em {
-    color: var(--primary);
-
-    font-style: normal;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(30px, 4vw, 43px);
+  line-height: 1.1;
+  letter-spacing: -1.7px;
 }
 
 .section-heading p {
-    margin-top: 14px;
-
-    color: var(--muted);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
 }
 
 
-/* =========================
-   SITUATION
-========================= */
+/* =========================================================
+   IMPACT
+   ========================================================= */
 
-.situation-section {
-    padding: 90px 0 70px;
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
 }
 
-.situation-grid {
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 14px;
+.impact-card {
+  background: white;
+  border: 1px solid var(--line);
+  padding: 25px;
+  border-radius: 20px;
+  min-height: 245px;
+  transition: .25s ease;
 }
 
-.situation-card {
-    background: white;
-
-    padding: 22px;
-
-    border: 1px solid var(--border);
-
-    border-radius: 17px;
+.impact-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
 }
 
-.situation-icon {
-    font-size: 30px;
-
-    margin-bottom: 13px;
+.impact-icon {
+  width: 43px;
+  height: 43px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: var(--orange-soft);
+  margin-bottom: 20px;
+  font-size: 20px;
 }
 
-.situation-card strong {
-    display: block;
-
-    margin-bottom: 7px;
+.impact-card > strong {
+  font-family: "Manrope", sans-serif;
+  font-size: 28px;
+  display: block;
 }
 
-.situation-card p {
-    color: var(--muted);
+.impact-card h3 {
+  font-size: 14px;
+  margin-top: 4px;
+}
 
-    font-size: 13px;
+.impact-card p {
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 8px;
+  line-height: 1.65;
+}
+
+.impact-card small {
+  display: block;
+  color: #9a9e9b;
+  font-size: 9px;
+  margin-top: 12px;
 }
 
 
-/* =========================
+/* =========================================================
    STORY
-========================= */
-
-.story-section {
-    padding: 70px 0 90px;
-}
+   ========================================================= */
 
 .story-grid {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 45px;
-
-    align-items: center;
+  display: grid;
+  grid-template-columns: 1.04fr .96fr;
+  gap: 70px;
+  align-items: center;
 }
 
-.story-image {
-    min-height: 480px;
-
-    border-radius: 20px;
-
-    overflow: hidden;
-
-    background-image:
-        linear-gradient(
-            to top,
-            rgba(0,0,0,.7),
-            rgba(0,0,0,0)
-        ),
-        url("images/asap.jpg");
-
-    background-size: cover;
-
-    background-position: center;
+.story-photo {
+  position: relative;
+  border-radius: 27px;
+  overflow: hidden;
+  min-height: 520px;
+  background: #222;
+  box-shadow: var(--shadow);
 }
 
-.image-placeholder {
-    height: 480px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: flex-end;
-
-    padding: 25px;
-
-    color: white;
+.story-photo img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
 }
 
-.image-placeholder span {
-    display: none;
+.photo-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 55px 22px 18px;
+  color: white;
+  font-size: 10px;
+  background: linear-gradient(transparent, rgba(0,0,0,.75));
 }
 
-.image-placeholder strong {
-    font-size: 12px;
-
-    letter-spacing: 1px;
+.story-copy h2 {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(34px, 4vw, 50px);
+  line-height: 1.05;
+  letter-spacing: -2px;
+  margin-bottom: 23px;
 }
 
-.image-placeholder small {
-    margin-top: 5px;
-
-    color: rgba(255,255,255,.8);
-
-    font-size: 11px;
+.story-copy > p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 15px;
 }
 
-.story-content p {
-    color: var(--muted);
-
-    font-size: 16px;
-
-    margin-bottom: 18px;
+.quote {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+  padding: 20px;
+  border-left: 4px solid var(--orange);
+  background: var(--orange-soft);
+  border-radius: 0 15px 15px 0;
 }
 
-.story-content > strong {
-    font-size: 19px;
+.quote span {
+  font-family: Georgia, serif;
+  color: var(--orange);
+  font-size: 45px;
+  line-height: .7;
+}
+
+.quote p {
+  font-weight: 700;
+  font-size: 14px;
 }
 
 
-/* =========================
+/* =========================================================
    NEEDS
-========================= */
+   ========================================================= */
 
-.needs-section {
-    padding: 90px 0;
-
-    background: white;
+.needs {
+  background: #f8f7f4;
 }
 
 .needs-grid {
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 14px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
 }
 
 .need-card {
-    padding: 23px;
+  background: white;
+  border-radius: 21px;
+  padding: 27px;
+  position: relative;
+  border: 1px solid var(--line);
+  min-height: 240px;
+  overflow: hidden;
+  transition: .25s ease;
+}
 
-    border: 1px solid var(--border);
+.need-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
+}
 
-    border-radius: 17px;
+.need-number {
+  position: absolute;
+  right: 20px;
+  top: 17px;
+  font-size: 10px;
+  color: #aaa;
+  font-weight: 800;
 }
 
 .need-icon {
-    font-size: 38px;
-
-    margin-bottom: 15px;
+  font-size: 30px;
+  margin-bottom: 28px;
 }
 
 .need-card h3 {
-    margin-bottom: 7px;
-
-    font-size: 17px;
+  font-family: "Manrope", sans-serif;
+  font-size: 17px;
 }
 
 .need-card p {
-    color: var(--muted);
-
-    font-size: 13px;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 9px;
 }
 
 
-/* =========================
+/* =========================================================
    HOW
-========================= */
+   ========================================================= */
 
-.how-section {
-    padding: 90px 0;
+.how {
+  background: white;
 }
 
 .steps {
-    display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 25px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
-.step-number {
-    color: var(--primary);
+.step {
+  display: flex;
+  gap: 15px;
+  padding: 30px 25px;
+  border-right: 1px solid var(--line);
+}
 
-    font-weight: 900;
+.step:last-child {
+  border-right: 0;
+}
 
-    margin-bottom: 10px;
+.step > span {
+  min-width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--orange);
+  color: white;
+  font-size: 10px;
+  font-weight: 900;
 }
 
 .step h3 {
-    margin-bottom: 6px;
-
-    font-size: 17px;
+  font-size: 14px;
 }
 
 .step p {
-    color: var(--muted);
-
-    font-size: 13px;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 4px;
 }
 
 
-/* =========================
-   FOTO / GALLERY
-========================= */
+/* =========================================================
+   GALLERY
+   ========================================================= */
 
 .gallery-section {
-    padding: 90px 0;
-
-    background: white;
+  background: var(--cream);
 }
 
 .gallery {
-    display: grid;
-
-    grid-template-columns: 2fr 1fr 1fr;
-
-    grid-template-rows: 220px 220px;
-
-    gap: 12px;
-
-    width: 100%;
+  display: grid;
+  grid-template-columns: 1.45fr .8fr .8fr;
+  grid-template-rows: 270px 270px;
+  gap: 13px;
 }
 
-.gallery-item {
-    position: relative;
-
-    overflow: hidden;
-
-    border-radius: 16px;
-
-    background-size: cover;
-
-    background-position: center;
-
-    min-width: 0;
+.gallery figure {
+  position: relative;
+  overflow: hidden;
+  border-radius: 19px;
+  background: #222;
+  margin: 0;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
 }
 
-.gallery-item::before {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            to top,
-            rgba(0,0,0,.55),
-            transparent 60%
-        );
+.gallery-main {
+  grid-row: 1 / 3;
 }
 
-.gallery-item::after {
-    content: "Kalimantan • Dokumentasi";
-
-    position: absolute;
-
-    left: 15px;
-    bottom: 13px;
-
-    color: white;
-
-    font-size: 10px;
-
-    font-weight: bold;
-
-    letter-spacing: .5px;
+.gallery figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .6s ease;
 }
 
-.gallery-item:nth-child(1) {
-    background-image: url("images/hero.jpg");
+.gallery figure:hover img {
+  transform: scale(1.06);
 }
 
-.gallery-item:nth-child(2) {
-    background-image: url("images/pemadaman.jpg");
+.gallery figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 55px 18px 17px;
+  color: white;
+  background: linear-gradient(transparent, rgba(0,0,0,.8));
 }
 
-.gallery-item:nth-child(3) {
-    background-image: url("images/asap.jpg");
+.gallery figcaption strong,
+.gallery figcaption span {
+  display: block;
 }
 
-.gallery-item:nth-child(4) {
-    background-image: url("images/hutan.jpg");
+.gallery figcaption strong {
+  font-size: 14px;
 }
 
-.gallery-item:nth-child(5) {
-    background-image: url("images/pemulihan.jpg");
+.gallery figcaption span {
+  font-size: 9px;
+  opacity: .75;
+  margin-top: 2px;
 }
 
-.gallery-item.large {
-    grid-row: span 2;
+.gallery-note {
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 15px;
 }
 
 
-/* =========================
+/* =========================================================
    TRANSPARENCY
-========================= */
+   ========================================================= */
 
-.transparency-section {
-    padding: 85px 0;
+.transparency {
+  padding: 75px 0;
+  color: white;
 
-    background: var(--dark);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(9,35,25,.96),
+      rgba(13,57,39,.90)
+    ),
+    url("https://commons.wikimedia.org/wiki/Special:FilePath/Kalimantan%20(Borneo)%20under%20thick%20smoke%20haze,%20August%202026.jpg");
 
-    color: white;
+  background-size: cover;
+  background-position: center;
 }
 
-.transparency-card {
-    display: grid;
-
-    grid-template-columns: 1.4fr 1fr;
-
-    gap: 45px;
-
-    align-items: center;
+.transparency-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: center;
 }
 
-.transparency-card > div:first-child > span {
-    color: #ff9275;
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    letter-spacing: 2px;
+.transparency-copy h2 {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(31px, 4vw, 45px);
+  line-height: 1.1;
+  letter-spacing: -1.5px;
 }
 
-.transparency-card h2 {
-    font-size: clamp(30px,5vw,48px);
-
-    line-height: 1.05;
-
-    margin: 14px 0;
-}
-
-.transparency-card p {
-    color: #aaa;
+.transparency-copy p {
+  max-width: 570px;
+  color: rgba(255,255,255,.72);
+  font-size: 13px;
+  margin-top: 17px;
 }
 
 .transparency-stats {
-    display: grid;
-
-    grid-template-columns: repeat(3,1fr);
-
-    gap: 9px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .transparency-stats div {
-    padding: 18px;
+  padding: 25px 16px;
+  border-right: 1px solid rgba(255,255,255,.2);
+}
 
-    text-align: center;
-
-    border: 1px solid #333;
-
-    border-radius: 13px;
+.transparency-stats div:last-child {
+  border-right: 0;
 }
 
 .transparency-stats strong {
-    display: block;
-
-    font-size: 23px;
+  font-family: "Manrope", sans-serif;
+  font-size: 25px;
+  display: block;
 }
 
 .transparency-stats span {
-    color: #888;
-
-    font-size: 11px;
+  color: rgba(255,255,255,.65);
+  font-size: 10px;
 }
 
 
-/* =========================
+/* =========================================================
    TESTIMONIAL
-========================= */
+   ========================================================= */
 
 .testimonial-section {
-    padding: 90px 0;
+  text-align: center;
+  background: white;
 }
 
-.testimonial {
-    max-width: 720px;
-
-    margin: auto;
-
-    padding: 35px 25px;
-
-    background: white;
-
-    border-radius: 19px;
-
-    text-align: center;
-
-    box-shadow: 0 10px 30px rgba(0,0,0,.05);
+.centered-eyebrow {
+  text-align: center;
 }
 
-.quote-icon {
-    color: var(--primary);
-
-    font-size: 65px;
-
-    line-height: .5;
+.testimonial-title {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(32px, 5vw, 50px);
+  letter-spacing: -2px;
+  margin-bottom: 30px;
 }
 
-.testimonial p {
-    color: #555;
+.testimonial-card {
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--cream);
+  border-radius: 24px;
+  padding: 45px;
+}
 
-    font-size: 19px;
+.quote-mark {
+  font-family: Georgia, serif;
+  font-size: 65px;
+  color: var(--orange);
+  line-height: .5;
+}
 
-    font-style: italic;
+.testimonial-card p {
+  font-family: "Manrope", sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  margin: 20px 0;
+}
 
-    margin: 20px 0;
+.testimonial-card span {
+  color: var(--muted);
+  font-size: 11px;
 }
 
 
-/* =========================
+/* =========================================================
    SHARE
-========================= */
+   ========================================================= */
 
 .share-section {
-    padding-bottom: 80px;
+  background: #fff3ec;
+  padding: 60px 0;
 }
 
-.share-card {
-    padding: 50px 20px;
-
-    text-align: center;
-
-    border-radius: 22px;
-
-    background: #fff0eb;
+.share-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
 }
 
-.share-icon {
-    font-size: 42px;
+.share-inner h2 {
+  font-family: "Manrope", sans-serif;
+  font-size: 29px;
+  line-height: 1.15;
 }
 
-.share-card h2 {
-    font-size: 32px;
-
-    margin: 8px 0;
+.share-inner p {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 8px;
 }
 
-.share-card p {
-    max-width: 500px;
-
-    margin: 0 auto 22px;
-
-    color: var(--muted);
+.share-buttons {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
 }
 
-.share-button {
-    border: 0;
+.share-buttons button {
+  border: 1px solid #ddd3cc;
+  background: white;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  transition: .2s ease;
+}
 
-    padding: 13px 23px;
-
-    border-radius: 9px;
-
-    background: var(--primary);
-
-    color: white;
-
-    font-weight: bold;
+.share-buttons button:hover {
+  background: var(--orange);
+  color: white;
+  border-color: var(--orange);
 }
 
 
-/* =========================
+/* =========================================================
    SOURCES
-========================= */
+   ========================================================= */
 
-.sources-section {
-    padding-bottom: 65px;
+.sources {
+  background: white;
 }
 
-.sources-card {
-    padding: 23px;
-
-    background: white;
-
-    border: 1px solid var(--border);
-
-    border-radius: 17px;
+.source-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 13px;
 }
 
-.sources-card h3 {
-    margin-bottom: 7px;
+.source-card {
+  display: block;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  transition: .25s ease;
 }
 
-.sources-card p {
-    color: var(--muted);
-
-    font-size: 13px;
+.source-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+  border-color: #ddd;
 }
 
-.source-links {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 9px;
-
-    margin-top: 14px;
+.source-card strong {
+  display: block;
+  font-size: 13px;
 }
 
-.source-links a {
-    padding: 7px 12px;
-
-    background: #f3f3f3;
-
-    border-radius: 8px;
-
-    color: var(--primary);
-
-    font-size: 12px;
-
-    font-weight: bold;
+.source-card span {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 7px;
 }
 
 
-/* =========================
+/* =========================================================
+   PHOTO CREDITS
+   ========================================================= */
+
+.photo-credits {
+  background: #f5f4f0;
+  padding: 28px 0 90px;
+}
+
+.photo-credits strong {
+  font-size: 11px;
+}
+
+.photo-credits p {
+  color: var(--muted);
+  font-size: 10px;
+  max-width: 850px;
+  margin-top: 6px;
+}
+
+
+/* =========================================================
    FOOTER
-========================= */
+   ========================================================= */
 
 footer {
-    padding: 40px 0 100px;
-
-    background: #111;
-
-    color: white;
-
-    text-align: center;
+  background: #101715;
+  color: white;
+  padding: 55px 0 95px;
 }
 
-.footer-logo {
-    font-size: 19px;
-
-    font-weight: bold;
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
 }
 
-footer p {
-    color: #888;
-
-    margin-top: 5px;
+.footer-brand p {
+  max-width: 330px;
+  color: rgba(255,255,255,.55);
+  font-size: 11px;
+  margin-top: 16px;
 }
 
-.footer-line {
-    height: 1px;
-
-    background: #292929;
-
-    margin: 25px 0;
+.footer-links {
+  display: flex;
+  gap: 23px;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
-footer small {
-    color: #666;
+.footer-links a {
+  color: rgba(255,255,255,.65);
+  font-size: 11px;
+}
+
+.footer-links a:hover {
+  color: white;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  border-top: 1px solid rgba(255,255,255,.1);
+  margin-top: 40px;
+  padding-top: 20px;
+  color: rgba(255,255,255,.35);
+  font-size: 9px;
 }
 
 
-/* =========================
+/* =========================================================
    STICKY DONATION
-========================= */
+   ========================================================= */
 
-.sticky-donation {
-    position: fixed;
+.sticky-donate {
+  position: fixed;
+  z-index: 100;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
 
-    z-index: 100;
+  width: min(610px, calc(100% - 25px));
 
-    left: 0;
-    right: 0;
-    bottom: 0;
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(18px);
 
-    min-height: 70px;
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 12px 45px rgba(0,0,0,.16);
 
-    padding: 9px 18px;
+  border-radius: 20px;
 
-    background: white;
+  padding: 10px 12px 10px 18px;
 
-    box-shadow:
-        0 -5px 25px rgba(0,0,0,.12);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
 }
 
-.sticky-donation small,
-.sticky-donation strong {
-    display: block;
+.sticky-donate small {
+  display: block;
+  color: var(--muted);
+  font-size: 9px;
 }
 
-.sticky-donation small {
-    color: #777;
-
-    font-size: 10px;
+.sticky-donate strong {
+  display: block;
+  font-size: 13px;
 }
 
-.sticky-donation strong {
-    font-size: 13px;
+.sticky-donate button {
+  border: 0;
+  background: var(--orange);
+  color: white;
+  padding: 14px 24px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 900;
 }
 
-.sticky-donation button {
-    border: 0;
-
-    background: var(--primary);
-
-    color: white;
-
-    padding: 11px 22px;
-
-    border-radius: 9px;
-
-    font-weight: bold;
+.sticky-donate button:hover {
+  background: var(--orange-dark);
 }
 
 
-/* =========================
+/* =========================================================
    MODAL
-========================= */
+   ========================================================= */
 
 .modal {
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 500;
-
-    display: none;
-
-    align-items: flex-end;
-
-    justify-content: center;
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
 .modal.active {
-    display: flex;
+  display: flex;
 }
 
-.modal-overlay {
-    position: absolute;
-
-    inset: 0;
-
-    background: rgba(0,0,0,.65);
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4,10,8,.72);
+  backdrop-filter: blur(7px);
 }
 
 .modal-box {
-    position: relative;
+  position: relative;
+  z-index: 2;
 
-    z-index: 2;
+  width: min(460px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
 
-    width: min(500px,100%);
+  background: white;
+  border-radius: 26px;
+  padding: 29px;
 
-    padding: 30px 22px;
+  box-shadow: 0 30px 100px rgba(0,0,0,.35);
 
-    background: white;
+  animation: modalIn .25s ease;
+}
 
-    border-radius: 23px 23px 0 0;
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .modal-close {
-    position: absolute;
+  position: absolute;
+  top: 16px;
+  right: 16px;
 
-    top: 14px;
-    right: 16px;
+  width: 34px;
+  height: 34px;
 
-    width: 34px;
-    height: 34px;
+  border: 0;
+  border-radius: 50%;
 
-    border: 0;
+  background: #f1f1ef;
+  color: #555;
 
-    border-radius: 50%;
-
-    background: #eee;
-
-    font-size: 21px;
-}
-
-.modal-label {
-    color: var(--primary);
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    letter-spacing: 1px;
+  font-size: 22px;
 }
 
 .modal-box h2 {
-    margin: 8px 0 22px;
+  font-family: "Manrope", sans-serif;
+  font-size: 28px;
+  line-height: 1.15;
 }
 
-.nominal-grid {
-    display: grid;
-
-    grid-template-columns: repeat(3,1fr);
-
-    gap: 9px;
+.modal-description {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 9px;
 }
 
-.nominal-grid button {
-    padding: 12px;
-
-    border: 1px solid #ddd;
-
-    border-radius: 9px;
-
-    background: white;
-
-    font-weight: bold;
+.amount-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  margin-top: 22px;
 }
 
-.nominal-grid button.selected {
-    border-color: var(--primary);
+.amount-grid button {
+  background: white;
+  border: 1px solid #dededb;
+  border-radius: 13px;
+  padding: 14px 7px;
+  font-weight: 800;
+  font-size: 11px;
+}
 
-    background: #fff0eb;
-
-    color: var(--primary);
+.amount-grid button:hover,
+.amount-grid button.selected {
+  border-color: var(--orange);
+  color: var(--orange);
+  background: var(--orange-soft);
 }
 
 .selected-amount {
-    display: flex;
+  background: #f7f6f3;
+  padding: 16px;
+  border-radius: 15px;
+  margin-top: 14px;
+}
 
-    justify-content: space-between;
+.selected-amount small {
+  display: block;
+  color: var(--muted);
+  font-size: 9px;
+}
 
-    padding: 14px;
+.selected-amount strong {
+  display: block;
+  font-family: "Manrope", sans-serif;
+  font-size: 22px;
+  margin-top: 2px;
+}
 
-    margin-top: 18px;
+.payment-coming {
+  display: flex;
+  gap: 13px;
+  margin-top: 14px;
+  padding: 16px;
+  border-radius: 15px;
+  background: #eff8f3;
+  border: 1px solid #d6eddf;
+}
 
-    border-radius: 9px;
+.payment-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--green);
+  color: white;
+}
 
-    background: #f5f5f5;
+.payment-coming strong {
+  font-size: 12px;
+}
+
+.payment-coming p {
+  color: var(--muted);
+  font-size: 9px;
+  margin-top: 3px;
 }
 
 .modal-donate {
-    width: 100%;
-
-    padding: 14px;
-
-    margin-top: 14px;
-
-    border: 0;
-
-    border-radius: 9px;
-
-    background: var(--primary);
-
-    color: white;
-
-    font-weight: bold;
+  width: 100%;
+  background: var(--orange);
+  color: white;
+  margin-top: 15px;
 }
 
-.modal-note {
-    margin-top: 10px;
-
-    text-align: center;
-
-    color: #999;
-
-    font-size: 10px;
+.modal-warning {
+  color: #9b6d62;
+  text-align: center;
+  font-size: 9px;
+  margin-top: 10px;
 }
 
 
-/* =========================
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+.toast {
+  position: fixed;
+  z-index: 600;
+  left: 50%;
+  bottom: 90px;
+
+  transform: translate(-50%, 20px);
+
+  background: #17201d;
+  color: white;
+
+  padding: 13px 18px;
+  border-radius: 999px;
+
+  font-size: 11px;
+  opacity: 0;
+  pointer-events: none;
+
+  transition: .25s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+
+/* =========================================================
    TABLET
-========================= */
+   ========================================================= */
 
-@media (max-width: 850px) {
+@media (max-width: 950px) {
 
-    .situation-grid {
-        grid-template-columns: 1fr 1fr;
-    }
+  .desktop-nav {
+    display: none;
+  }
 
-    .needs-grid {
-        grid-template-columns: 1fr 1fr;
-    }
+  .hero-content {
+    grid-template-columns: 1fr 330px;
+    gap: 35px;
+  }
 
-    .steps {
-        grid-template-columns: 1fr 1fr;
-    }
+  .impact-grid,
+  .needs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    .story-grid {
-        grid-template-columns: 1fr;
-    }
+  .section-heading {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
 
-    .transparency-card {
-        grid-template-columns: 1fr;
-    }
+  .story-grid {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .story-photo,
+  .story-photo img {
+    min-height: 420px;
+    height: 420px;
+  }
+
+  .source-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
 }
 
 
-/* =========================
-   HP
-========================= */
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 680px) {
 
-    .container {
-        width: calc(100% - 28px);
-    }
+  .container {
+    width: min(100% - 28px, 560px);
+  }
 
-    .header-container {
-        width: calc(100% - 28px);
-    }
+  .site-header {
+    position: absolute;
+  }
 
-    .header-button {
-        display: none;
-    }
+  .nav {
+    height: 68px;
+  }
 
-    .hero {
-        min-height: 650px;
+  .brand strong {
+    font-size: 14px;
+  }
 
-        padding:
-            100px 15px 45px;
-    }
+  .brand small {
+    font-size: 9px;
+  }
 
-    .hero h1 {
-        font-size: 47px;
+  .header-donate {
+    padding: 10px 14px;
+    font-size: 10px;
+  }
 
-        letter-spacing: -2px;
-    }
 
-    .hero p {
-        font-size: 15px;
-    }
+  /* HERO */
 
-    .donation-section {
-        margin-top: -25px;
-    }
+  .hero {
+    min-height: auto;
+  }
 
-    .donation-card {
-        padding: 21px;
-    }
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding-top: 115px;
+    padding-bottom: 48px;
+  }
 
-    .donation-card h2 {
-        font-size: 27px;
-    }
+  .hero h1 {
+    font-size: 48px;
+    letter-spacing: -2px;
+  }
 
-    .progress-info {
-        font-size: 11px;
-    }
+  .hero-copy > p {
+    font-size: 14px;
+  }
 
-    .situation-grid,
-    .needs-grid,
-    .steps {
-        grid-template-columns: 1fr;
-    }
+  .hero-buttons {
+    margin-top: 22px;
+  }
 
-    .story-image {
-        min-height: 350px;
-    }
+  .hero-buttons .btn {
+    width: 100%;
+  }
 
-    .image-placeholder {
-        height: 350px;
-    }
+  .donation-card {
+    padding: 22px;
+  }
 
-    /*
-       GALERI HP
-       Dibuat 1 kolom supaya TIDAK melebar
-       dan tidak membuat layar rusak.
-    */
 
-    .gallery {
-        display: grid;
+  /* SECTIONS */
 
-        grid-template-columns: 1fr;
+  .section {
+    padding: 65px 0;
+  }
 
-        grid-template-rows:
-            240px
-            200px
-            200px
-            200px
-            200px;
+  .section-heading {
+    margin-bottom: 30px;
+  }
 
-        gap: 10px;
-    }
+  .section-heading h2 {
+    font-size: 31px;
+  }
 
-    .gallery-item {
-        width: 100%;
-        height: 100%;
-    }
 
-    .gallery-item.large {
-        grid-row: auto;
-    }
+  /* IMPACT */
 
-    .transparency-stats {
-        grid-template-columns: 1fr;
-    }
+  .impact-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
 
-    .testimonial {
-        padding: 28px 18px;
-    }
+  .impact-card {
+    min-height: 225px;
+    padding: 19px;
+  }
 
-    .testimonial p {
-        font-size: 17px;
-    }
+  .impact-card > strong {
+    font-size: 23px;
+  }
 
-    /*
-       PANEL DONASI HP
-       Tidak lagi memaksa lebar layar.
-    */
 
-    .sticky-donation {
-        min-height: 67px;
+  /* STORY */
 
-        padding:
-            8px 12px;
+  .story-photo,
+  .story-photo img {
+    height: 350px;
+    min-height: 350px;
+  }
 
-        justify-content: space-between;
+  .story-copy h2 {
+    font-size: 34px;
+  }
 
-        gap: 10px;
-    }
 
-    .sticky-donation small {
-        font-size: 9px;
-    }
+  /* NEEDS */
 
-    .sticky-donation strong {
-        font-size: 11px;
-    }
+  .needs-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
 
-    .sticky-donation button {
-        flex-shrink: 0;
+  .need-card {
+    min-height: 220px;
+    padding: 19px;
+  }
 
-        padding:
-            11px 17px;
+  .need-icon {
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
 
-        font-size: 12px;
-    }
 
-    .nominal-grid {
-        grid-template-columns: 1fr 1fr;
-    }
+  /* STEPS */
+
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .step {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding: 20px 5px;
+  }
+
+  .step:last-child {
+    border-bottom: 0;
+  }
+
+
+  /* GALLERY */
+
+  .gallery {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 280px 190px 190px;
+    gap: 9px;
+  }
+
+  .gallery-main {
+    grid-column: 1 / 3;
+    grid-row: auto;
+  }
+
+
+  /* TRANSPARENCY */
+
+  .transparency-inner {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .transparency-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .transparency-stats div {
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.2);
+  }
+
+  .transparency-stats div:last-child {
+    border-bottom: 0;
+  }
+
+
+  /* SHARE */
+
+  .share-inner {
+    display: block;
+  }
+
+  .share-buttons {
+    margin-top: 20px;
+  }
+
+
+  /* SOURCES */
+
+  .source-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  /* FOOTER */
+
+  .footer-inner {
+    display: block;
+  }
+
+  .footer-links {
+    margin-top: 30px;
+    gap: 15px;
+  }
+
+  .footer-bottom {
+    display: block;
+  }
+
+  .footer-bottom span {
+    display: block;
+    margin-top: 5px;
+  }
+
+
+  /* STICKY */
+
+  .sticky-donate {
+    bottom: 9px;
+    padding: 9px 9px 9px 14px;
+  }
+
+  .sticky-donate button {
+    padding: 13px 19px;
+  }
+
+
+  /* MODAL */
+
+  .modal {
+    padding: 12px;
+  }
+
+  .modal-box {
+    padding: 24px 18px;
+    border-radius: 22px;
+  }
+
+  .amount-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
 }
 
 
-/* =========================
-   HP KECIL
-========================= */
+/* =========================================================
+   VERY SMALL PHONE
+   ========================================================= */
 
-@media (max-width: 380px) {
+@media (max-width: 390px) {
 
-    .hero h1 {
-        font-size: 41px;
-    }
+  .hero h1 {
+    font-size: 42px;
+  }
 
-    .donation-top {
-        gap: 10px;
-    }
+  .impact-grid,
+  .needs-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .donation-card h2 {
-        font-size: 24px;
-    }
+  .gallery {
+    grid-template-columns: 1fr;
+    grid-template-rows: 270px 210px 210px 210px 210px;
+  }
 
-    .sticky-donation strong {
-        font-size: 10px;
-    }
+  .gallery-main {
+    grid-column: auto;
+  }
 
-    .sticky-donation button {
-        padding:
-            10px 14px;
-    }
+  .sticky-donate strong {
+    font-size: 11px;
+  }
+
+  .sticky-donate button {
+    font-size: 10px;
+    padding: 12px 15px;
+  }
+
 }
