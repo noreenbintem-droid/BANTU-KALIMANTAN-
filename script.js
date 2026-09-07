@@ -1,471 +1,260 @@
-/* =====================================
-   BANTU KALIMANTAN
-   SCRIPT FINAL
-===================================== */
+/* =========================================================
+   BANTU KALIMANTAN 2026
+   FINAL JAVASCRIPT
+   ========================================================= */
 
 
-/* =====================================
-   DATA CAMPAIGN
-===================================== */
+/* ================= DONATION MODAL ================= */
 
-const campaign = {
+const donationModal = document.getElementById("donationModal");
+const selectedAmount = document.getElementById("selectedAmount");
 
-    target: 100000000,
-
-    collected: 0,
-
-    donors: 0
-
-};
-
-
-
-/* =====================================
-   FORMAT RUPIAH
-===================================== */
-
-function formatRupiah(number) {
-
-    return new Intl.NumberFormat(
-        "id-ID",
-        {
-            style: "currency",
-            currency: "IDR",
-            maximumFractionDigits: 0
-        }
-    ).format(number);
-
-}
-
-
-
-/* =====================================
-   UPDATE CAMPAIGN
-===================================== */
-
-function updateCampaign() {
-
-    const amount =
-        document.getElementById(
-            "donationAmount"
-        );
-
-    const donors =
-        document.getElementById(
-            "donorCount"
-        );
-
-    const progress =
-        document.getElementById(
-            "progressBar"
-        );
-
-    const percent =
-        document.getElementById(
-            "progressPercent"
-        );
-
-    const statDonors =
-        document.getElementById(
-            "statDonors"
-        );
-
-    const statPercent =
-        document.getElementById(
-            "statPercent"
-        );
-
-
-    let percentage =
-        (campaign.collected /
-        campaign.target) * 100;
-
-
-    percentage =
-        Math.min(
-            percentage,
-            100
-        );
-
-
-    if (amount) {
-
-        amount.textContent =
-            formatRupiah(
-                campaign.collected
-            );
-
-    }
-
-
-    if (donors) {
-
-        donors.textContent =
-            campaign.donors;
-
-    }
-
-
-    if (progress) {
-
-        progress.style.width =
-            percentage + "%";
-
-    }
-
-
-    if (percent) {
-
-        percent.textContent =
-            Math.round(
-                percentage
-            ) + "%";
-
-    }
-
-
-    if (statDonors) {
-
-        statDonors.textContent =
-            campaign.donors;
-
-    }
-
-
-    if (statPercent) {
-
-        statPercent.textContent =
-            Math.round(
-                percentage
-            ) + "%";
-
-    }
-
-}
-
-
-
-/* =====================================
-   DONATION MODAL
-===================================== */
-
-const modal =
-    document.getElementById(
-        "donationModal"
-    );
-
-
-let selectedAmount =
-    100000;
-
+let currentAmount = 0;
 
 
 function openDonation() {
-
-    if (!modal) return;
-
-    modal.classList.add(
-        "active"
-    );
-
-    document.body.classList.add(
-        "modal-open"
-    );
-
+  donationModal.classList.add("active");
+  document.body.style.overflow = "hidden";
 }
-
 
 
 function closeDonation() {
-
-    if (!modal) return;
-
-    modal.classList.remove(
-        "active"
-    );
-
-    document.body.classList.remove(
-        "modal-open"
-    );
-
+  donationModal.classList.remove("active");
+  document.body.style.overflow = "";
 }
 
-
-
-/* =====================================
-   SELECT NOMINAL
-===================================== */
 
 function selectAmount(amount) {
 
-    selectedAmount =
-        amount;
+  currentAmount = amount;
 
+  selectedAmount.textContent =
+    "Rp" + amount.toLocaleString("id-ID");
 
-    const display =
-        document.getElementById(
-            "selectedAmount"
-        );
+  const buttons =
+    document.querySelectorAll(".amount-grid button");
 
+  buttons.forEach(function(button) {
+    button.classList.remove("selected");
+  });
 
-    if (display) {
+  buttons.forEach(function(button) {
 
-        display.textContent =
-            formatRupiah(
-                amount
-            );
+    const number =
+      parseInt(
+        button.textContent.replace(/\D/g, ""),
+        10
+      ) * 1000;
 
+    if (number === amount) {
+      button.classList.add("selected");
     }
 
-
-    const buttons =
-        document.querySelectorAll(
-            ".nominal-grid button"
-        );
-
-
-    buttons.forEach(
-        function(button) {
-
-            button.classList.remove(
-                "selected"
-            );
-
-        }
-    );
-
-
-    const clicked =
-        Array.from(buttons)
-        .find(
-            function(button) {
-
-                return button
-                    .textContent
-                    .includes(
-                        formatShortRupiah(
-                            amount
-                        )
-                    );
-
-            }
-        );
-
-
-    if (clicked) {
-
-        clicked.classList.add(
-            "selected"
-        );
-
-    }
+  });
 
 }
 
 
+function showPaymentMessage() {
 
-/* =====================================
-   SHORT RUPIAH
-===================================== */
+  if (currentAmount === 0) {
 
-function formatShortRupiah(amount) {
-
-    if (amount >= 1000000) {
-
-        return "Rp1JT";
-
-    }
-
-    if (amount >= 1000) {
-
-        return "Rp" +
-            (amount / 1000) +
-            "K";
-
-    }
-
-    return "Rp" + amount;
-
-}
-
-
-
-/* =====================================
-   PROCESS DONATION
-===================================== */
-
-function processDonation() {
-
-    alert(
-        "Nominal " +
-        formatRupiah(selectedAmount) +
-        " dipilih.\n\n" +
-        "QRIS/metode pembayaran akan " +
-        "dihubungkan setelah sistem " +
-        "pembayaran campaign siap."
+    showToast(
+      "Pilih nominal donasi terlebih dahulu ❤️"
     );
 
+    return;
+  }
+
+  showToast(
+    "QRIS sedang dipersiapkan. Nominal Rp" +
+    currentAmount.toLocaleString("id-ID") +
+    " sudah dipilih."
+  );
+
 }
 
 
+/* ================= TOAST ================= */
 
-/* =====================================
-   SHARE CAMPAIGN
-===================================== */
-
-function shareCampaign() {
-
-    const shareData = {
-
-        title:
-            "Bantu Kalimantan",
-
-        text:
-            "Mari bersama mendukung Kalimantan " +
-            "dan masyarakat yang terdampak karhutla.",
-
-        url:
-            window.location.href
-
-    };
+let toastTimer;
 
 
-    if (
-        navigator.share
-    ) {
+function showToast(message) {
 
-        navigator.share(
-            shareData
-        )
-        .catch(
-            function() {}
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(function() {
+
+    toast.classList.remove("show");
+
+  }, 3200);
+
+}
+
+
+/* ================= COPY LINK ================= */
+
+function copyLink() {
+
+  const url = window.location.href;
+
+  if (navigator.clipboard) {
+
+    navigator.clipboard.writeText(url)
+      .then(function() {
+
+        showToast(
+          "Link berhasil disalin ❤️"
         );
 
-    } else {
+      })
+      .catch(function() {
 
-        copyCampaignLink();
-
-    }
-
-}
-
-
-
-/* =====================================
-   COPY LINK
-===================================== */
-
-function copyCampaignLink() {
-
-    const url =
-        window.location.href;
-
-
-    if (
-        navigator.clipboard
-    ) {
-
-        navigator.clipboard
-            .writeText(url)
-            .then(
-                function() {
-
-                    alert(
-                        "Link campaign berhasil disalin."
-                    );
-
-                }
-            )
-            .catch(
-                function() {
-
-                    fallbackCopy(url);
-
-                }
-            );
-
-    } else {
-
-        fallbackCopy(url);
-
-    }
-
-}
-
-
-
-/* =====================================
-   FALLBACK COPY
-===================================== */
-
-function fallbackCopy(text) {
-
-    const input =
-        document.createElement(
-            "input"
+        showToast(
+          "Silakan salin alamat halaman ini."
         );
 
+      });
 
-    input.value =
-        text;
+  } else {
 
-
-    document.body.appendChild(
-        input
+    showToast(
+      "Silakan salin alamat halaman ini."
     );
 
-
-    input.select();
-
-
-    document.execCommand(
-        "copy"
-    );
-
-
-    document.body.removeChild(
-        input
-    );
-
-
-    alert(
-        "Link campaign berhasil disalin."
-    );
+  }
 
 }
 
 
+/* ================= WHATSAPP ================= */
 
-/* =====================================
-   ESCAPE CLOSE MODAL
-===================================== */
+function shareWhatsApp() {
+
+  const text =
+    "Mari ikut peduli terhadap Kalimantan dan dampak karhutla 2026 ❤️\n\n" +
+    "Bantu Kalimantan — Bernapas Lagi\n" +
+    window.location.href;
+
+  const whatsapp =
+    "https://wa.me/?text=" +
+    encodeURIComponent(text);
+
+  window.open(
+    whatsapp,
+    "_blank",
+    "noopener"
+  );
+
+}
+
+
+/* ================= ESC KEY ================= */
 
 document.addEventListener(
-    "keydown",
-    function(event) {
+  "keydown",
+  function(event) {
 
-        if (
-            event.key === "Escape"
-        ) {
-
-            closeDonation();
-
-        }
-
+    if (event.key === "Escape") {
+      closeDonation();
     }
+
+  }
 );
 
 
+/* ================= IMAGE ERROR HANDLING ================= */
 
-/* =====================================
-   INITIALIZE
-===================================== */
+document.querySelectorAll("img").forEach(function(img) {
 
-document.addEventListener(
-    "DOMContentLoaded",
+  img.addEventListener(
+    "error",
     function() {
 
-        updateCampaign();
+      /*
+       * Jika Wikimedia sedang tidak bisa diakses,
+       * gambar tidak akan membuat layout rusak.
+       */
+
+      this.style.opacity = "0";
+
+      if (this.parentElement) {
+        this.parentElement.style.background =
+          "linear-gradient(135deg,#25372f,#111916)";
+      }
 
     }
+  );
+
+});
+
+
+/* ================= ACTIVE NAV ================= */
+
+const navLinks =
+  document.querySelectorAll(".desktop-nav a");
+
+const sections =
+  document.querySelectorAll("section[id]");
+
+
+window.addEventListener(
+  "scroll",
+  function() {
+
+    let current = "";
+
+    sections.forEach(function(section) {
+
+      const top =
+        section.offsetTop - 160;
+
+      if (window.scrollY >= top) {
+        current = section.getAttribute("id");
+      }
+
+    });
+
+    navLinks.forEach(function(link) {
+
+      link.style.opacity = ".75";
+
+      if (
+        link.getAttribute("href") === "#" + current
+      ) {
+        link.style.opacity = "1";
+      }
+
+    });
+
+  },
+  { passive: true }
+);
+
+
+/* ================= CLOSE MODAL BY BACKDROP ================= */
+
+donationModal.addEventListener(
+  "click",
+  function(event) {
+
+    if (
+      event.target.classList.contains(
+        "modal-backdrop"
+      )
+    ) {
+
+      closeDonation();
+
+    }
+
+  }
 );
