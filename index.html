@@ -568,9 +568,7 @@
     </div>
 
   </section>
-
-
-  <!-- ================= SHARE ================= -->
+    <!-- ================= SHARE ================= -->
   <section class="share-section">
 
     <div class="container share-inner">
@@ -775,7 +773,7 @@
       </h2>
 
       <p class="modal-description">
-        Setiap nominal berarti. Sistem pembayaran QRIS sedang dipersiapkan.
+        Setiap nominal berarti. Silakan pilih nominal lalu scan QRIS untuk melakukan donasi.
       </p>
 
 
@@ -797,23 +795,38 @@
       </div>
 
 
+      <!-- ================= QRIS ================= -->
       <div class="payment-coming">
 
         <div class="payment-icon">▣</div>
 
         <div>
-          <strong>QRIS sedang dipersiapkan</strong>
+          <strong>Scan QRIS untuk Donasi</strong>
 
           <p>
-            Setelah akun pembayaran siap,
-            tombol ini dapat digunakan untuk melanjutkan donasi.
+            Gunakan aplikasi pembayaran yang mendukung QRIS,
+            lalu bayar sesuai nominal yang kamu pilih.
           </p>
         </div>
 
       </div>
 
 
-      <button class="btn modal-donate" onclick="showPaymentMessage()">
+      <div style="text-align:center; margin:18px 0;">
+
+        <img
+          src="IMG_5629.jpeg"
+          alt="QRIS KALIMANTAN PEDULI"
+          style="display:block; width:100%; max-width:360px; height:auto; margin:0 auto; border-radius:14px;"
+        >
+
+      </div>
+
+
+      <button
+        class="btn modal-donate"
+        onclick="showToast('Silakan scan QRIS di atas untuk menyelesaikan donasi ❤️')"
+      >
         Lanjutkan Donasi
       </button>
 
